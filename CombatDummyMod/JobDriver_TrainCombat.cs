@@ -110,10 +110,10 @@ namespace KriilMod_CD
             //Works but interupted by feeding or recreation - never equips previous weapon
             Toil doneTraining = Toils_Jump.JumpIf(reequipStartingWeaponLabel, delegate
             {
-                return LearningSaturated();
+                return LearningSaturated() || Find.TickManager.TicksGame > this.jobStartTick + 5000;
                // float currentSkill = 0f;
                 //pawn.skills.GetSkill
-                //return Find.TickManager.TicksGame > this.jobStartTick + 5000;
+                //return ;
             });
             yield return doneTraining;
             Toil castVerb = Toils_Combat.CastVerb(TargetIndex.A, false);
