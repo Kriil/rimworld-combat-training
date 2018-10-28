@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <ThingDef ParentName="BuildingBase">
+    <defName>CombatDummy</defName>
+    <label>combat dummy</label>
+    <description>Used to train melee and shooting skills</description>
+    <thingClass>KriilMod_CD.Building_CombatDummy</thingClass>
+    <graphicData>
+      <texPath>CombatTrainingDummy</texPath>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <shadowData>
+        <volume>(0.3, 0.2, 0.3)</volume>
+        <offset>(0,0,-0.1)</offset>
+      </shadowData>
+      <damageData>
+        <rect>(0.2,0.2,0.6,0.6)</rect>
+      </damageData>
+      <drawSize>1.2</drawSize>
+    </graphicData>
+    <defaultPlacingRot>South</defaultPlacingRot>
+    <castEdgeShadows>false</castEdgeShadows>
+    <altitudeLayer>Building</altitudeLayer>
+    <minifiedDef>MinifiedThing</minifiedDef>
+    <thingCategories>
+      <li>BuildingsMisc</li>
+    </thingCategories>
+    <statBases>
+      <MaxHitPoints>1000</MaxHitPoints>
+      <WorkToBuild>4000</WorkToBuild>
+      <Flammability>0.5</Flammability>
+      <Mass>25</Mass>
+    </statBases>
+    <scatterableOnMapGen>false</scatterableOnMapGen>
+    <fillPercent>0.70</fillPercent>
+    <costStuffCount>70</costStuffCount>
+    <stuffCategories>
+      <li>Metallic</li>
+      <li>Woody</li>
+      <li>Stony</li>
+    </stuffCategories>
+    <comps>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="CompProperties_Forbiddable" />
+    </comps>
+    <designationCategory>Misc</designationCategory>
+    <leaveResourcesWhenKilled>true</leaveResourcesWhenKilled>
+    <resourcesFractionWhenDeconstructed>0.5</resourcesFractionWhenDeconstructed>
+    <passability>PassThroughOnly</passability>
+    <pathCost>70</pathCost>
+    <canOverlapZones>false</canOverlapZones>
+  </ThingDef>  
+</Defs>

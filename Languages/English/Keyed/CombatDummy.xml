@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+
+<CommandTrainCombatDesc>Train Combat: Designate this combat dummy for training combat skills.</CommandTrainCombatDesc>
+<CommandTrainCombatLabel>Train combat</CommandTrainCombatLabel>
+<MessageMustDesignateCombatDummy>Must designate a combat dummy.</MessageMustDesignateCombatDummy>
+<DesignatorTrainCombat>Train Combat</DesignatorTrainCombat>
+<DesignatorTrainCombatDesc>Train shooting and melee skills on a combat dummy.</DesignatorTrainCombatDesc>
+<WorkTagTrainingCombat>training combat</WorkTagTrainingCombat>
+<PracticedCombatEnoughToday>{1_labelShort}  has practiced combat too much today.</PracticedCombatEnoughToday>
+</LanguageData>
