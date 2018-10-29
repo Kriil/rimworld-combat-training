@@ -14,7 +14,10 @@ namespace KriilMod_CD
         public static ThoughtDef TrainedInImpressiveCombatTrainingRoom;
         public static ThingDef MeleeWeapon_TrainingKnife;
         public static ThingDef Gun_TrainingBBGun;
+        public static ThingDef Bow_TrainingShort;
         public static ThingCategoryDef TrainingWeapons;
+        public static ThingCategoryDef MeleeTrainingWeapons;
+        public static ThingCategoryDef RangedTrainingWeapons;
 
         static CombatTrainingDefOf()
         {

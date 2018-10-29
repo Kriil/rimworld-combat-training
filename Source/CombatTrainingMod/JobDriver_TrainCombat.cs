@@ -195,12 +195,10 @@ namespace KriilMod_CD
 
         /*
          * Returns the nearest training weapon.  Prioritizes training weapons of the same type (melee or ranged) of the weapon passed in.
-         * Returns null if weapon is forbidden
          * Sloppy implementation - needs optimization
          */
         private ThingWithComps GetNearestTrainingWeapon(Thing currentWeapon, bool tryingAgain)
         {
-            //return null if forbidden
             ThingRequest request;          
             if ((currentWeapon == null || currentWeapon.def.IsMeleeWeapon) && !tryingAgain)
             {
@@ -208,7 +206,15 @@ namespace KriilMod_CD
             }
             else
             {
-                request = ThingRequest.ForDef(CombatTrainingDefOf.Gun_TrainingBBGun);
+                if(pawn.Faction.def.techLevel == TechLevel.Neolithic)
+                {
+                    request = ThingRequest.ForDef(CombatTrainingDefOf.Bow_TrainingShort);
+                }
+                else
+                {
+                    request = ThingRequest.ForDef(CombatTrainingDefOf.Gun_TrainingBBGun);
+                }
+                
             }
             ThingWithComps thing = (ThingWithComps)GenClosest.RegionwiseBFSWorker(this.TargetA.Thing.Position, pawn.Map, request, PathEndMode.OnCell, TraverseParms.For(pawn, Danger.Deadly, TraverseMode.ByPawn, false), (Thing x) => pawn.CanReserve(x, 1, -1, null, false), null, 0, 12, 50f, out int regionsSearched, RegionType.Set_Passable, true);
             if (thing == null && !tryingAgain)

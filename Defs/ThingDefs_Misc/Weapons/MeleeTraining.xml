@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
 
-  <ThingDef ParentName="BaseMeleeWeapon_Sharp_Quality">
+  <ThingDef ParentName="BaseMeleeTrainingWeapon_Sharp">
 		<defName>MeleeWeapon_TrainingKnife</defName>
 		<label>training knife</label>
     <techLevel>Neolithic</techLevel>
@@ -14,9 +14,6 @@
       <li>MedievalMeleeBasic</li>
       <li>NeolithicMeleeBasic</li>
     </weaponTags>
-    <thingCategories>
-      <li>TrainingWeapons</li>
-    </thingCategories>
     <costStuffCount>15</costStuffCount>
 		<statBases>
 			<WorkToMake>900</WorkToMake>
@@ -32,7 +29,7 @@
         <capacities>
           <li>Blunt</li>
         </capacities>
-        <power>0</power>
+        <power>0.0</power>
         <cooldownTime>2</cooldownTime>
       </li>
       <li>
@@ -40,7 +37,7 @@
         <capacities>
           <li>Cut</li>
         </capacities>
-        <power>0</power>
+        <power>0.0</power>
         <cooldownTime>1.5</cooldownTime>
       </li>
       <li>
@@ -48,7 +45,7 @@
         <capacities>
           <li>Stab</li>
         </capacities>
-        <power>0</power>
+        <power>0.0</power>
         <cooldownTime>2</cooldownTime>
       </li>
     </tools>
