@@ -32,7 +32,7 @@
 
   <ThingDef Name="BaseHumanMakeableTrainingGun" ParentName="BaseMakeableTrainingGun" Abstract="True">
     <weaponTags>
-      <li>Gun</li>
+      <li>TrainingWeapons</li>
     </weaponTags>
   </ThingDef>
 

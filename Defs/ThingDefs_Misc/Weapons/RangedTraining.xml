@@ -100,8 +100,7 @@
       <li>RangedTrainingWeapons</li>
     </thingCategories>
     <weaponTags>
-      <li>Neolithic</li>
-      <li>NeolithicRangedBasic</li>
+      <li>TrainingWeapons</li>
     </weaponTags>
     <recipeMaker>
       <recipeUsers>
