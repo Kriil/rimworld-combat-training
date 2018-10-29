@@ -77,14 +77,17 @@ namespace KriilMod_CD
          */
         public override AcceptanceReport CanDesignateCell(IntVec3 c)
         {
-            if (!c.InBounds(base.Map) || c.Fogged(base.Map))
+            if(c != null)
             {
-                return false;
-            }
-            if (!this.CanDesignateThing(this.GetDesignatable(c)).Accepted)
-            {
-                return "MessageMustDesignateCombatDummy".Translate();
-            }
+                if (!c.InBounds(base.Map) || c.Fogged(base.Map))
+                {
+                    return false;
+                }
+                if (!this.CanDesignateThing(this.GetDesignatable(c)).Accepted)
+                {
+                    return "MessageMustDesignateCombatDummy".Translate();
+                }
+            }            
             return true;
         }     
 
@@ -93,7 +96,10 @@ namespace KriilMod_CD
          */ 
 		public override void DesignateThing(Thing t)
 		{
-            HugsLibUtility.ToggleDesignation(t, CombatTrainingDefOf.TrainCombatDesignation, true);     
+            if(t != null)
+            {
+                HugsLibUtility.ToggleDesignation(t, CombatTrainingDefOf.TrainCombatDesignation, true);
+            }              
 		}
 
 

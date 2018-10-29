@@ -66,7 +66,7 @@ namespace KriilMod_CD
 
             if (startingEquippedWeapon == null || !startingEquippedWeapon.def.IsWithinCategory(CombatTrainingDefOf.TrainingWeapons))
             {
-                trainingWeapon = GetNearestTrainingWeapon(startingEquippedWeapon, false);
+                trainingWeapon = GetNearestTrainingWeapon(startingEquippedWeapon);
                 if (trainingWeapon != null && !trainingWeapon.IsForbidden(pawn))
                 {
                     //reserve training weapon, goto, and equip
@@ -117,7 +117,7 @@ namespace KriilMod_CD
             yield return castVerb;
             yield return Toils_Jump.Jump(doneTraining);
             yield return reequipStartingWeaponLabel;
-            //gaim room buff
+            //gain room buff
             yield return Toils_General.Do(delegate
             {
                 TryGainCombatTrainingRoomThought();
@@ -195,18 +195,21 @@ namespace KriilMod_CD
 
         /*
          * Returns the nearest training weapon.  Prioritizes training weapons of the same type (melee or ranged) of the weapon passed in.
-         * Sloppy implementation - needs optimization
          */
-        private ThingWithComps GetNearestTrainingWeapon(Thing currentWeapon, bool tryingAgain)
+        private ThingWithComps GetNearestTrainingWeapon(Thing currentWeapon)
         {
-            ThingRequest request;          
-            if ((currentWeapon == null || currentWeapon.def.IsMeleeWeapon) && !tryingAgain)
+            ThingRequest request;
+            ThingWithComps nearestTrainingWeapon = null;
+            //if not armed or armed with melee weapon, look for a training knife
+            if (currentWeapon == null || (currentWeapon != null && currentWeapon.def.IsMeleeWeapon))
             {
                 request = ThingRequest.ForDef(CombatTrainingDefOf.MeleeWeapon_TrainingKnife);
+                nearestTrainingWeapon = (ThingWithComps)GenClosest.RegionwiseBFSWorker(this.TargetA.Thing.Position, pawn.Map, request, PathEndMode.OnCell, TraverseParms.For(pawn, Danger.Deadly, TraverseMode.ByPawn, false), (Thing x) => pawn.CanReserve(x, 1, -1, null, false), null, 0, 12, 50f, out int regionsSearched, RegionType.Set_Passable, true);
             }
-            else
+            //if using ranged weapon, look for training weapon base on tech level
+            if(currentWeapon != null && !currentWeapon.def.IsMeleeWeapon)
             {
-                if(pawn.Faction.def.techLevel == TechLevel.Neolithic)
+                if (pawn.Faction.def.techLevel.IsNeolithicOrWorse())
                 {
                     request = ThingRequest.ForDef(CombatTrainingDefOf.Bow_TrainingShort);
                 }
@@ -214,17 +217,26 @@ namespace KriilMod_CD
                 {
                     request = ThingRequest.ForDef(CombatTrainingDefOf.Gun_TrainingBBGun);
                 }
-                
+                nearestTrainingWeapon = (ThingWithComps)GenClosest.RegionwiseBFSWorker(this.TargetA.Thing.Position, pawn.Map, request, PathEndMode.OnCell, TraverseParms.For(pawn, Danger.Deadly, TraverseMode.ByPawn, false), (Thing x) => pawn.CanReserve(x, 1, -1, null, false), null, 0, 12, 50f, out int regionsSearched, RegionType.Set_Passable, true);
             }
-            ThingWithComps thing = (ThingWithComps)GenClosest.RegionwiseBFSWorker(this.TargetA.Thing.Position, pawn.Map, request, PathEndMode.OnCell, TraverseParms.For(pawn, Danger.Deadly, TraverseMode.ByPawn, false), (Thing x) => pawn.CanReserve(x, 1, -1, null, false), null, 0, 12, 50f, out int regionsSearched, RegionType.Set_Passable, true);
-            if (thing == null && !tryingAgain)
+
+            //if training weapon wasn't found, cover two cases
+            //was not armed or using a melee waepon, equip ranged weapon instead
+            //not neolithic, but have a short bow available
+            if(nearestTrainingWeapon == null)
             {
-                return GetNearestTrainingWeapon(currentWeapon, true);
+                request = ThingRequest.ForDef(CombatTrainingDefOf.Bow_TrainingShort);
+                nearestTrainingWeapon = (ThingWithComps)GenClosest.RegionwiseBFSWorker(this.TargetA.Thing.Position, pawn.Map, request, PathEndMode.OnCell, TraverseParms.For(pawn, Danger.Deadly, TraverseMode.ByPawn, false), (Thing x) => pawn.CanReserve(x, 1, -1, null, false), null, 0, 12, 50f, out int regionsSearched, RegionType.Set_Passable, true);
             }
-            else
+
+            //if training weapon wasn't found, cover last case
+            //was not armed or using a melee waepon, equip ranged weapon instead - no bow avaialble - check BB gun
+            if (nearestTrainingWeapon == null)
             {
-                return thing;
+                request = ThingRequest.ForDef(CombatTrainingDefOf.Gun_TrainingBBGun);
+                nearestTrainingWeapon = (ThingWithComps)GenClosest.RegionwiseBFSWorker(this.TargetA.Thing.Position, pawn.Map, request, PathEndMode.OnCell, TraverseParms.For(pawn, Danger.Deadly, TraverseMode.ByPawn, false), (Thing x) => pawn.CanReserve(x, 1, -1, null, false), null, 0, 12, 50f, out int regionsSearched, RegionType.Set_Passable, true);
             }
+            return nearestTrainingWeapon;
         }
 
         /*

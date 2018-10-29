@@ -16,8 +16,6 @@ namespace KriilMod_CD
         public static ThingDef Gun_TrainingBBGun;
         public static ThingDef Bow_TrainingShort;
         public static ThingCategoryDef TrainingWeapons;
-        public static ThingCategoryDef MeleeTrainingWeapons;
-        public static ThingCategoryDef RangedTrainingWeapons;
 
         static CombatTrainingDefOf()
         {

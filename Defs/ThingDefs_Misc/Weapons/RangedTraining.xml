@@ -3,7 +3,7 @@
 
   <ThingDef ParentName="BaseHumanMakeableTrainingGun">
     <defName>Gun_TrainingBBGun</defName>
-    <label>training BB rifle</label>
+    <label>training BB gun</label>
     <description>A simple BB gun used for training ranged combat skills.</description>
     <graphicData>
       <texPath>Things/Item/Equipment/WeaponRanged/BoltActionRifle</texPath>
