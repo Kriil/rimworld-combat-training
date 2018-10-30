@@ -8,6 +8,7 @@
 
 <size=16><b>This mod adds a new work type to let you train your combat skills.  Compatible with RimWorld [1.0]</b></size>
 
+<size=16><b>New Feature (10/29): Combat dummies now have hit chance tool tips</b></size>
 <size=16><b>New Feature (10/29): Training weapon auto-equip</b></size>
 <size=16><b>New Feature (10/29): Added training bows</b></size>
 <size=16><b>New Feature (10/21): New Combat Dummy graphics and coloring</b></size>
@@ -43,11 +44,6 @@ Combat dummies and training weapons have been altered a bit to add new features.
   
 <size=16><color=orange>Balancing</color></size>
 Combat training grants about the same xp as actual combat.  This is balanced by making it a work type. Colonists won't be doing any other work when training combat, plus it costs resources to create a dummy and training weapons.  Additionally, combat training end after skill saturation (4000xp per day for combat skills).
-
-<size=16><color=orange>Future Enhancements</color></size>
-
-<size=15><color=green>Hit chance float window</color></size>
-Check hit chance by hovering over the combat dummy being used for training.
 ]]>
 </description>
   <targetVersion>1.0.2059</targetVersion>

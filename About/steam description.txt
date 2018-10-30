@@ -2,6 +2,7 @@
 
 [h1]This mod adds a new work type to let you train your combat skills.  Compatible with RimWorld [1.0][/h1]
 
+[h1]New Feature (10/29): Combat dummies now have hit chance tool tips[\h1]
 [h1]New Feature (10/29): Training weapon auto-equip[/h1]
 [h1]New Feature (10/29): Added training bows[/h1]
 [h1]New Feature (10/21): New Combat Dummy graphics and coloring[/h1]
