@@ -3,8 +3,8 @@ using Verse;
 
 namespace KriilMod_CD
 {
-	public class RoomRoleWorker_CombatTrainingRoom : RoomRoleWorker
-	{
+    public class RoomRoleWorker_CombatTrainingRoom : RoomRoleWorker
+    {
         public override float GetScore(Room room)
         {
             int num = 0;

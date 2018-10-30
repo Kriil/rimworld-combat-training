@@ -1,5 +1,4 @@
 using RimWorld;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Verse;
@@ -50,14 +49,14 @@ namespace KriilMod_CD
             {
                 return this.pawn.story.WorkTagIsDisabled(WorkTags.Violent);
             });
-            
+
             this.jobStartTick = Find.TickManager.TicksGame;
 
             //make sure thing has train combat designation
             this.FailOnThingMissingDesignation(TargetIndex.A, CombatTrainingDefOf.TrainCombatDesignation);
 
             //fail if dummy is despawned null or forbidden
-            this.FailOnDespawnedNullOrForbidden(TargetIndex.A);            
+            this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
 
             /**** START SWITCH TO TRAINING WEAPON ****/
             //Pick up a training weapon if one is nearby. Remember previous weapon     
@@ -90,7 +89,7 @@ namespace KriilMod_CD
             /**** END SWITCH TO TRAINING WEAPON ****/
 
             //set the job's attack verb to melee or shooting - needed to gotoCastPosition or stack overflow occurs
-            yield return Toils_Combat.TrySetJobToUseAttackVerb(TargetIndex.A);      
+            yield return Toils_Combat.TrySetJobToUseAttackVerb(TargetIndex.A);
             //based on attack verb, go to cast position
             Toil gotoCastPos = Toils_Combat.GotoCastPosition(TargetIndex.A, true, 0.95f).EndOnDespawnedOrNull(TargetIndex.A);
             yield return gotoCastPos;
@@ -101,17 +100,17 @@ namespace KriilMod_CD
             //if done training jumnp to reequipStartingWeaponLabel
             Toil doneTraining = Toils_Jump.JumpIf(reequipStartingWeaponLabel, delegate
             {
-                if(!LearningSaturated())
+                if (!LearningSaturated())
                 {
                     return Dummy.Destroyed || Find.TickManager.TicksGame > this.jobStartTick + 5000;
                 }
                 return true;
-                
+
             });
             yield return doneTraining;
             Toil castVerb = Toils_Combat.CastVerb(TargetIndex.A, false);
             castVerb.AddFinishAction(delegate
-            { 
+            {
                 LearnAttackSkill();
             });
             yield return castVerb;
@@ -143,7 +142,7 @@ namespace KriilMod_CD
          * Causes pawn to get impressive combat training room mood buff
          */
         private void TryGainCombatTrainingRoomThought()
-        { 
+        {
             Room room = pawn.GetRoom(RegionType.Set_Passable);
             if (room != null)
             {
@@ -171,7 +170,7 @@ namespace KriilMod_CD
             }
             else
             {
-                saturated = pawn.skills.GetSkill(SkillDefOf.Shooting).LearningSaturatedToday; 
+                saturated = pawn.skills.GetSkill(SkillDefOf.Shooting).LearningSaturatedToday;
             }
             return saturated;
         }
@@ -191,7 +190,7 @@ namespace KriilMod_CD
             {
                 pawn.skills.Learn(SkillDefOf.Shooting, xpGained, false);
             }
-        }      
+        }
 
         /*
          * Returns the nearest training weapon.  Prioritizes training weapons of the same type (melee or ranged) of the weapon passed in.
@@ -207,7 +206,7 @@ namespace KriilMod_CD
                 nearestTrainingWeapon = (ThingWithComps)GenClosest.RegionwiseBFSWorker(this.TargetA.Thing.Position, pawn.Map, request, PathEndMode.OnCell, TraverseParms.For(pawn, Danger.Deadly, TraverseMode.ByPawn, false), (Thing x) => pawn.CanReserve(x, 1, -1, null, false), null, 0, 12, 50f, out int regionsSearched, RegionType.Set_Passable, true);
             }
             //if using ranged weapon, look for training weapon base on tech level
-            if(currentWeapon != null && !currentWeapon.def.IsMeleeWeapon)
+            if (currentWeapon != null && !currentWeapon.def.IsMeleeWeapon)
             {
                 if (pawn.Faction.def.techLevel.IsNeolithicOrWorse())
                 {
@@ -223,7 +222,7 @@ namespace KriilMod_CD
             //if training weapon wasn't found, cover two cases
             //was not armed or using a melee waepon, equip ranged weapon instead
             //not neolithic, but have a short bow available
-            if(nearestTrainingWeapon == null)
+            if (nearestTrainingWeapon == null)
             {
                 request = ThingRequest.ForDef(CombatTrainingDefOf.Bow_TrainingShort);
                 nearestTrainingWeapon = (ThingWithComps)GenClosest.RegionwiseBFSWorker(this.TargetA.Thing.Position, pawn.Map, request, PathEndMode.OnCell, TraverseParms.For(pawn, Danger.Deadly, TraverseMode.ByPawn, false), (Thing x) => pawn.CanReserve(x, 1, -1, null, false), null, 0, 12, 50f, out int regionsSearched, RegionType.Set_Passable, true);
@@ -249,7 +248,7 @@ namespace KriilMod_CD
             {
                 initAction = delegate ()
                 {
-                    
+
                     ThingWithComps thingWithComps = (ThingWithComps)equipment;
                     ThingWithComps thingWithComps2;
 
@@ -268,11 +267,11 @@ namespace KriilMod_CD
                     {
                         thingWithComps.def.soundInteract.PlayOneShot(new TargetInfo(this.pawn.Position, this.pawn.Map, false));
                     }
-                },                
+                },
                 defaultCompleteMode = ToilCompleteMode.Instant
             };
             equipToil.FailOnDespawnedNullOrForbidden(index);
             return equipToil;
-        }    
+        }
     }
 }

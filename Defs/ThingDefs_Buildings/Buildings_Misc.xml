@@ -5,6 +5,7 @@
     <label>combat dummy</label>
     <description>Used to train melee and shooting skills</description>
     <thingClass>KriilMod_CD.Building_CombatDummy</thingClass>
+    <hasTooltip>true</hasTooltip>
     <graphicData>
       <texPath>CombatTrainingDummy</texPath>
       <graphicClass>Graphic_Multi</graphicClass>

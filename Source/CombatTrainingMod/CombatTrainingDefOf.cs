@@ -3,10 +3,10 @@ using Verse;
 
 namespace KriilMod_CD
 {
-	[DefOf]
-	public static class CombatTrainingDefOf
-	{
-		public static DesignationDef TrainCombatDesignation;
+    [DefOf]
+    public static class CombatTrainingDefOf
+    {
+        public static DesignationDef TrainCombatDesignation;
         public static WorkGiverDef TrainCombat;
         public static WorkTypeDef TrainingCombat;
         public static JobDef TrainOnCombatDummy;

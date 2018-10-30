@@ -1,26 +1,25 @@
 using HugsLib.Utils;
-using System.Collections.Generic;
-using UnityEngine;
 using RimWorld;
+using System.Collections.Generic;
 using Verse;
 
 namespace KriilMod_CD
 {
-	public class Designator_TrainCombat : Designator
-	{
-         /*
-         * Default constructor 
-         */ 
+    public class Designator_TrainCombat : Designator
+    {
+        /*
+        * Default constructor 
+        */
         public Designator_TrainCombat()
-		{
+        {
             this.defaultLabel = "DesignatorTrainCombat".Translate();
-			this.defaultDesc = "DesignatorTrainCombatDesc".Translate();
+            this.defaultDesc = "DesignatorTrainCombatDesc".Translate();
             this.icon = icon = TexCommand.Draft;
             //this.icon = ContentFinder<Texture2D>.Get("UI/Commands/Attack", true); //icon for orders menu
             this.soundDragSustain = SoundDefOf.Designate_DragStandard;
-			this.soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;
-			this.useMouseIcon = true;
-			this.soundSucceeded = SoundDefOf.Designate_Hunt;
+            this.soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;
+            this.useMouseIcon = true;
+            this.soundSucceeded = SoundDefOf.Designate_Hunt;
             this.hotKey = KeyBindingDefOf.Misc9;
         }
 
@@ -36,16 +35,16 @@ namespace KriilMod_CD
          * Designates a thing at the given cell.  Checks are made to ensure that a thing at the given cell can be designated with the TrainCombatDesignation
          */
         public override void DesignateSingleCell(IntVec3 loc)
-		{
+        {
             Thing combatDummy = GetDesignatable(loc);
-            this.DesignateThing(combatDummy);                              
+            this.DesignateThing(combatDummy);
         }
 
         /*
          * Returns the thing at the given location if it can be designated
          */
         public Thing GetDesignatable(IntVec3 loc)
-        {             
+        {
             List<Thing> thingList = loc.GetThingList(base.Map);
             foreach (Thing thing in thingList)
             {
@@ -63,7 +62,7 @@ namespace KriilMod_CD
         public override AcceptanceReport CanDesignateThing(Thing t)
         {
             if (t != null)
-            {             
+            {
                 if (IsCombatDummy(t) && !HugsLibUtility.HasDesignation(t, CombatTrainingDefOf.TrainCombatDesignation))
                 {
                     return true;
@@ -77,7 +76,7 @@ namespace KriilMod_CD
          */
         public override AcceptanceReport CanDesignateCell(IntVec3 c)
         {
-            if(c != null)
+            if (c != null)
             {
                 if (!c.InBounds(base.Map) || c.Fogged(base.Map))
                 {
@@ -87,20 +86,20 @@ namespace KriilMod_CD
                 {
                     return "MessageMustDesignateCombatDummy".Translate();
                 }
-            }            
+            }
             return true;
-        }     
+        }
 
         /*
          * Gives the given thing the TrainCombatDesignation
-         */ 
-		public override void DesignateThing(Thing t)
-		{
-            if(t != null)
+         */
+        public override void DesignateThing(Thing t)
+        {
+            if (t != null)
             {
                 HugsLibUtility.ToggleDesignation(t, CombatTrainingDefOf.TrainCombatDesignation, true);
-            }              
-		}
+            }
+        }
 
 
         public override void SelectedUpdate()

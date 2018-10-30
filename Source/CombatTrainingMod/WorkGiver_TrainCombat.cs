@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using HugsLib.Utils;
 using RimWorld;
+using System.Collections.Generic;
 using Verse;
 using Verse.AI;
-using HugsLib.Utils;
 
 namespace KriilMod_CD
 {
@@ -11,10 +11,11 @@ namespace KriilMod_CD
 
         public override bool ShouldSkip(Pawn pawn, bool forced = false)
         {
-            if(forced)
+            if (forced)
             {
                 return pawn.story.WorkTagIsDisabled(WorkTags.Violent);
-            } else
+            }
+            else
             {
                 return pawn.skills.GetSkill(SkillDefOf.Melee).LearningSaturatedToday || pawn.skills.GetSkill(SkillDefOf.Shooting).LearningSaturatedToday;
             }
@@ -43,7 +44,7 @@ namespace KriilMod_CD
 
         public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
-            
+
             Verb verb = pawn.TryGetAttackVerb(t, false);
             if (verb != null)
             {
