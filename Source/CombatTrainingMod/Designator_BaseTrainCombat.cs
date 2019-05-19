@@ -13,10 +13,6 @@ namespace KriilMod_CD
         */
         public Designator_BaseTrainCombat()
         {
-            /*this.defaultLabel = "DesignatorTrainCombat".Translate();
-            this.defaultDesc = "DesignatorTrainCombatDesc".Translate();
-            this.icon = icon = TexCommand.Draft;*/
-            //this.icon = ContentFinder<Texture2D>.Get("UI/Commands/Attack", true); //icon for orders menu
             this.soundDragSustain = SoundDefOf.Designate_DragStandard;
             this.soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;
             this.useMouseIcon = true;
