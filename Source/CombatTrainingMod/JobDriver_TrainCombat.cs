@@ -1,6 +1,7 @@
 using RimWorld;
 using System.Collections.Generic;
 using System.Diagnostics;
+using HugsLib.Utils;
 using Verse;
 using Verse.AI;
 using Verse.Sound;
@@ -51,10 +52,17 @@ namespace KriilMod_CD
             });
 
             this.jobStartTick = Find.TickManager.TicksGame;
-
+            
             //make sure thing has train combat designation
-            this.FailOnThingMissingDesignation(TargetIndex.A, CombatTrainingDefOf.TrainCombatDesignation);
-
+            this.FailOn(() => !this.TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignation) &&
+                              !(pawn.equipment.Primary.def.IsMeleeWeapon &&
+                              this.TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationMeleeOnly)) &&
+                              !(pawn.equipment.Primary.def.IsRangedWeapon &&
+                              this.TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationRangedOnly)));
+            
+            // Make sure our dummy isn't already in use
+            this.FailOnSomeonePhysicallyInteracting(TargetIndex.A);
+            
             //fail if dummy is despawned null or forbidden
             this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
 
@@ -218,23 +226,37 @@ namespace KriilMod_CD
                 }
                 nearestTrainingWeapon = (ThingWithComps)GenClosest.RegionwiseBFSWorker(this.TargetA.Thing.Position, pawn.Map, request, PathEndMode.OnCell, TraverseParms.For(pawn, Danger.Deadly, TraverseMode.ByPawn, false), (Thing x) => pawn.CanReserve(x, 1, -1, null, false), null, 0, 12, 50f, out int regionsSearched, RegionType.Set_Passable, true);
             }
-
-            //if training weapon wasn't found, cover two cases
-            //was not armed or using a melee waepon, equip ranged weapon instead
-            //not neolithic, but have a short bow available
-            if (nearestTrainingWeapon == null)
+            
+            // Before finding an alternative (re: not the same) type of training weapon, ensure this is allowed
+            // Targets with the designation TrainCombatDesignation allow for weapons types than what's currently held
+            if (this.TargetA.Thing.HasDesignation(CombatTrainingDefOf.TrainCombatDesignation))
             {
-                request = ThingRequest.ForDef(CombatTrainingDefOf.Bow_TrainingShort);
-                nearestTrainingWeapon = (ThingWithComps)GenClosest.RegionwiseBFSWorker(this.TargetA.Thing.Position, pawn.Map, request, PathEndMode.OnCell, TraverseParms.For(pawn, Danger.Deadly, TraverseMode.ByPawn, false), (Thing x) => pawn.CanReserve(x, 1, -1, null, false), null, 0, 12, 50f, out int regionsSearched, RegionType.Set_Passable, true);
+                //if training weapon wasn't found, cover two cases
+                //was not armed or using a melee waepon, equip ranged weapon instead
+                //not neolithic, but have a short bow available
+                if (nearestTrainingWeapon == null)
+                {
+                    request = ThingRequest.ForDef(CombatTrainingDefOf.Bow_TrainingShort);
+                    nearestTrainingWeapon = (ThingWithComps) GenClosest.RegionwiseBFSWorker(this.TargetA.Thing.Position,
+                        pawn.Map, request, PathEndMode.OnCell,
+                        TraverseParms.For(pawn, Danger.Deadly, TraverseMode.ByPawn, false),
+                        (Thing x) => pawn.CanReserve(x, 1, -1, null, false), null, 0, 12, 50f, out int regionsSearched,
+                        RegionType.Set_Passable, true);
+                }
+
+                //if training weapon wasn't found, cover last case
+                //was not armed or using a melee waepon, equip ranged weapon instead - no bow avaialble - check BB gun
+                if (nearestTrainingWeapon == null)
+                {
+                    request = ThingRequest.ForDef(CombatTrainingDefOf.Gun_TrainingBBGun);
+                    nearestTrainingWeapon = (ThingWithComps) GenClosest.RegionwiseBFSWorker(this.TargetA.Thing.Position,
+                        pawn.Map, request, PathEndMode.OnCell,
+                        TraverseParms.For(pawn, Danger.Deadly, TraverseMode.ByPawn, false),
+                        (Thing x) => pawn.CanReserve(x, 1, -1, null, false), null, 0, 12, 50f, out int regionsSearched,
+                        RegionType.Set_Passable, true);
+                }
             }
 
-            //if training weapon wasn't found, cover last case
-            //was not armed or using a melee waepon, equip ranged weapon instead - no bow avaialble - check BB gun
-            if (nearestTrainingWeapon == null)
-            {
-                request = ThingRequest.ForDef(CombatTrainingDefOf.Gun_TrainingBBGun);
-                nearestTrainingWeapon = (ThingWithComps)GenClosest.RegionwiseBFSWorker(this.TargetA.Thing.Position, pawn.Map, request, PathEndMode.OnCell, TraverseParms.For(pawn, Danger.Deadly, TraverseMode.ByPawn, false), (Thing x) => pawn.CanReserve(x, 1, -1, null, false), null, 0, 12, 50f, out int regionsSearched, RegionType.Set_Passable, true);
-            }
             return nearestTrainingWeapon;
         }
 
