@@ -12,7 +12,7 @@ namespace KriilMod_CD
             {
                 yield return g;
             }
-            Designator designator = DesignatorUtility.FindAllowedDesignator<Designator_TrainCombat>();
+            Designator designator = DesignatorUtility.FindAllowedDesignator<Designator_BaseTrainCombat>();
             if (designator != null)
             {
                 yield return new Command_Action

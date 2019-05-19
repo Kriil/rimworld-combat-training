@@ -5,16 +5,17 @@ using Verse;
 
 namespace KriilMod_CD
 {
-    public class Designator_TrainCombat : Designator
+    public class Designator_BaseTrainCombat : Designator
     {
+        protected DesignationDef defOf = null;
         /*
         * Default constructor 
         */
-        public Designator_TrainCombat()
+        public Designator_BaseTrainCombat()
         {
-            this.defaultLabel = "DesignatorTrainCombat".Translate();
+            /*this.defaultLabel = "DesignatorTrainCombat".Translate();
             this.defaultDesc = "DesignatorTrainCombatDesc".Translate();
-            this.icon = icon = TexCommand.Draft;
+            this.icon = icon = TexCommand.Draft;*/
             //this.icon = ContentFinder<Texture2D>.Get("UI/Commands/Attack", true); //icon for orders menu
             this.soundDragSustain = SoundDefOf.Designate_DragStandard;
             this.soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;
@@ -63,7 +64,7 @@ namespace KriilMod_CD
         {
             if (t != null)
             {
-                if (IsCombatDummy(t) && !HugsLibUtility.HasDesignation(t, CombatTrainingDefOf.TrainCombatDesignation))
+                if (IsCombatDummy(t) && !HugsLibUtility.HasDesignation(t, this.defOf))
                 {
                     return true;
                 }
@@ -97,7 +98,7 @@ namespace KriilMod_CD
         {
             if (t != null)
             {
-                HugsLibUtility.ToggleDesignation(t, CombatTrainingDefOf.TrainCombatDesignation, true);
+                HugsLibUtility.ToggleDesignation(t, this.defOf, true);
             }
         }
 
