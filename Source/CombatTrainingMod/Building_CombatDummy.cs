@@ -19,6 +19,22 @@ namespace KriilMod_CD
 
         public TrainingTypes trainingType = TrainingTypes.None;
 
+        public override void PostMapInit()
+        {
+            if(this.HasDesignation(CombatTrainingDefOf.TrainCombatDesignation))
+            {
+                trainingType = TrainingTypes.Any;
+            }
+            else if(this.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationMeleeOnly))
+            {
+                trainingType = TrainingTypes.Melee;
+            }
+            else if (this.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationRangedOnly))
+            {
+                trainingType = TrainingTypes.Ranged;
+            }
+        }
+        
         protected void determineDesignation()
         {
             this.ToggleDesignation(CombatTrainingDefOf.TrainCombatDesignation, false);
