@@ -7,18 +7,21 @@
     <texturePath>Designations/Plan</texturePath><!-- Appears on thing -->
     <targetType>Thing</targetType>
     <removeIfBuildingDespawned>true</removeIfBuildingDespawned>
+    <designateCancelable>false</designateCancelable>
   </DesignationDef>
   <DesignationDef>
     <defName>TrainCombatDesignationMeleeOnly</defName>
     <texturePath>Designations/Slaughter</texturePath>
     <targetType>Thing</targetType>
     <removeIfBuildingDespawned>true</removeIfBuildingDespawned>
+    <designateCancelable>false</designateCancelable>
   </DesignationDef>
   <DesignationDef>
     <defName>TrainCombatDesignationRangedOnly</defName>
     <texturePath>Designations/Hunt</texturePath>
     <targetType>Thing</targetType>
     <removeIfBuildingDespawned>true</removeIfBuildingDespawned>
+    <designateCancelable>false</designateCancelable>
   </DesignationDef>
 
 </Defs>

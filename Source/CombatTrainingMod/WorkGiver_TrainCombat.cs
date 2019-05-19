@@ -33,7 +33,9 @@ namespace KriilMod_CD
                 LocalTargetInfo target = t;
                 if (pawn.CanReserve(target, 1, -1, null, forced))
                 {
-                    if (HugsLibUtility.HasDesignation(t, CombatTrainingDefOf.TrainCombatDesignation))
+                    if (HugsLibUtility.HasDesignation(t, CombatTrainingDefOf.TrainCombatDesignation) || 
+                        HugsLibUtility.HasDesignation(t, CombatTrainingDefOf.TrainCombatDesignationMeleeOnly) || 
+                        HugsLibUtility.HasDesignation(t, CombatTrainingDefOf.TrainCombatDesignationRangedOnly))
                     {
                         return true;
                     }
@@ -62,7 +64,9 @@ namespace KriilMod_CD
             for (int i = 0; i < desList.Count; i++)
             {
                 Designation des = desList[i];
-                if (des.def == CombatTrainingDefOf.TrainCombatDesignation)
+                if (des.def == CombatTrainingDefOf.TrainCombatDesignation || 
+                    des.def == CombatTrainingDefOf.TrainCombatDesignationMeleeOnly ||
+                    des.def == CombatTrainingDefOf.TrainCombatDesignationRangedOnly)
                 {
                     yield return des.target.Thing;
                 }

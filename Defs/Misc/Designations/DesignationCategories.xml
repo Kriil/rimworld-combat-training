@@ -24,10 +24,7 @@
       <li>Designator_Forbid</li>
       <li>Designator_Unforbid</li>
       <li>Designator_PlanAdd</li>
-      <li>Designator_PlanRemove</li> 
-      <li>KriilMod_CD.Designator_TrainCombatAny</li>
-      <li>KriilMod_CD.Designator_TrainCombatMeleeOnly</li>
-      <li>KriilMod_CD.Designator_TrainCombatRangedOnly</li>
+      <li>Designator_PlanRemove</li>
     </specialDesignatorClasses>
   </DesignationCategoryDef>
    
