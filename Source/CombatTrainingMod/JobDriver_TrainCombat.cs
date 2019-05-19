@@ -55,26 +55,30 @@ namespace KriilMod_CD
             });
 
             this.jobStartTick = Find.TickManager.TicksGame;
-            
-            //make sure thing has train combat designation
-            this.FailOn(() => !(
+
+            Func<bool> designationValidator = () => !(
                 // Dummy must have the any designation
                 TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignation)
                 ||
                 // Dummy must have the melee designation, and the pawn has a melee weapon held
                 TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationMeleeOnly) &&
-                 pawn.equipment.Primary.def.IsMeleeWeapon
+                pawn.equipment.Primary.def.IsMeleeWeapon
                 ||
                 // Dummy must have the ranged designation, and the pawn has a ranged weapon held
                 TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationRangedOnly) &&
-                 pawn.equipment.Primary.def.IsRangedWeapon
+                pawn.equipment.Primary.def.IsRangedWeapon
                 ||
                 // Dummy must have any designation, and the pawn is unarmed.
                 (TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignation) ||
                  TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationMeleeOnly) ||
                  TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationRangedOnly)) &&
-                pawn.equipment.Primary == null
-            ));
+                pawn.equipment.Primary == null);
+            
+            //make sure thing has train combat designation
+            if (designationValidator())
+            {
+                yield break;
+            }
 
             // Make sure our dummy isn't already in use
             this.FailOnSomeonePhysicallyInteracting(TargetIndex.A);
@@ -124,12 +128,9 @@ namespace KriilMod_CD
             //if done training jumnp to reequipStartingWeaponLabel
             Toil doneTraining = Toils_Jump.JumpIf(reequipStartingWeaponLabel, delegate
             {
-                if (!LearningSaturated())
-                {
-                    return Dummy.Destroyed || Find.TickManager.TicksGame > this.jobStartTick + 5000;
-                }
-                return true;
-
+                if (LearningSaturated()) return true;
+                else return Dummy.Destroyed || Find.TickManager.TicksGame > this.jobStartTick + 5000 ||
+                            designationValidator();
             });
             yield return doneTraining;
             Toil castVerb = Toils_Combat.CastVerb(TargetIndex.A, false);
