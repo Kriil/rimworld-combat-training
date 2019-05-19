@@ -57,18 +57,6 @@ namespace KriilMod_CD
             this.jobStartTick = Find.TickManager.TicksGame;
             
             //make sure thing has train combat designation
-            /*this.FailOn(() => !this.TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignation) &&
-                              !(pawn.equipment.Primary == null &&
-                                this.TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationMeleeOnly) ||
-                                this.TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationRangedOnly)
-                                  ) &&
-                              !(pawn.equipment.Primary != null && pawn.equipment.Primary.def.IsMeleeWeapon &&
-                                this.TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationMeleeOnly)
-                                  ) &&
-                              !(pawn.equipment.Primary != null && pawn.equipment.Primary.def.IsRangedWeapon &&
-                                this.TargetThingA.HasDesignation(CombatTrainingDefOf
-                                    .TrainCombatDesignationRangedOnly)));*/
-
             this.FailOn(() => !(
                 // Dummy must have the any designation
                 TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignation)
