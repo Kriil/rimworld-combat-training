@@ -6,6 +6,10 @@
 <MessageMustDesignateCombatDummy>Must designate a combat dummy.</MessageMustDesignateCombatDummy>
 <DesignatorTrainCombat>Train Combat</DesignatorTrainCombat>
 <DesignatorTrainCombatDesc>Train shooting and melee skills on a combat dummy.</DesignatorTrainCombatDesc>
+<DesignatorTrainCombatMeleeOnly>Train Melee Combat</DesignatorTrainCombatMeleeOnly>
+<DesignatorTrainCombatMeleeOnlyDesc>Train melee skills on a combat dummy.</DesignatorTrainCombatMeleeOnlyDesc>
+<DesignatorTrainCombatRangedOnly>Train Ranged Combat</DesignatorTrainCombatRangedOnly>
+<DesignatorTrainCombatRangedOnlyDesc>Train shooting skills on a combat dummy.</DesignatorTrainCombatRangedOnlyDesc>
 <WorkTagTrainingCombat>training combat</WorkTagTrainingCombat>
 <PracticedCombatEnoughToday>{1_labelShort}  has practiced combat too much today.</PracticedCombatEnoughToday>
 </LanguageData>
