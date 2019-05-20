@@ -54,7 +54,10 @@
     <Compile Include="Building_CombatDummy.cs" />
     <Compile Include="CombatTrainingController.cs" />
     <Compile Include="CombatTrainingDefOf.cs" />
-    <Compile Include="Designator_TrainCombat.cs" />
+    <Compile Include="Designator_BaseTrainCombat.cs" />
+    <Compile Include="Designator_TrainCombatAny.cs" />
+    <Compile Include="Designator_TrainCombatMeleeOnly.cs" />
+    <Compile Include="Designator_TrainCombatRangedOnly.cs" />
     <Compile Include="JobDriver_TrainCombat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoomRoleWorker_CombatTrainingRoom.cs" />

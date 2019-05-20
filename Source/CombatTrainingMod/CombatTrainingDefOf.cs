@@ -7,6 +7,8 @@ namespace KriilMod_CD
     public static class CombatTrainingDefOf
     {
         public static DesignationDef TrainCombatDesignation;
+        public static DesignationDef TrainCombatDesignationMeleeOnly;
+        public static DesignationDef TrainCombatDesignationRangedOnly;
         public static WorkGiverDef TrainCombat;
         public static WorkTypeDef TrainingCombat;
         public static JobDef TrainOnCombatDummy;

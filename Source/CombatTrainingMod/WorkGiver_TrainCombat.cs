@@ -1,4 +1,5 @@
-﻿using HugsLib.Utils;
+﻿using System;
+using HugsLib.Utils;
 using RimWorld;
 using System.Collections.Generic;
 using Verse;
@@ -8,6 +9,29 @@ namespace KriilMod_CD
 {
     public class WorkGiver_TrainCombat : WorkGiver_Scanner
     {
+        protected Func<DesignationDef, bool> getDesignationFilter(Pawn pawn)
+        {
+            ThingWithComps startingEquippedWeapon = pawn.equipment.Primary;
+            Func<DesignationDef, bool> filter;
+            if (startingEquippedWeapon == null)
+            {
+                filter = (x) => x == CombatTrainingDefOf.TrainCombatDesignation ||
+                                x == CombatTrainingDefOf.TrainCombatDesignationMeleeOnly ||
+                                x == CombatTrainingDefOf.TrainCombatDesignationRangedOnly;
+            }
+            else if (startingEquippedWeapon.def.IsMeleeWeapon)
+            {
+                filter = (x) => x == CombatTrainingDefOf.TrainCombatDesignation ||
+                                x == CombatTrainingDefOf.TrainCombatDesignationMeleeOnly;
+            }
+            else
+            {
+                filter = (x) => x == CombatTrainingDefOf.TrainCombatDesignation ||
+                                x == CombatTrainingDefOf.TrainCombatDesignationRangedOnly;
+            }
+
+            return filter;
+        }
 
         public override bool ShouldSkip(Pawn pawn, bool forced = false)
         {
@@ -33,9 +57,31 @@ namespace KriilMod_CD
                 LocalTargetInfo target = t;
                 if (pawn.CanReserve(target, 1, -1, null, forced))
                 {
-                    if (HugsLibUtility.HasDesignation(t, CombatTrainingDefOf.TrainCombatDesignation))
+                    ThingWithComps startingEquippedWeapon = pawn.equipment.Primary;
+                    if (startingEquippedWeapon == null)
                     {
-                        return true;
+                        if (HugsLibUtility.HasDesignation(t, CombatTrainingDefOf.TrainCombatDesignation) ||
+                            HugsLibUtility.HasDesignation(t, CombatTrainingDefOf.TrainCombatDesignationMeleeOnly) ||
+                            HugsLibUtility.HasDesignation(t, CombatTrainingDefOf.TrainCombatDesignationRangedOnly))
+                        {
+                            return true;
+                        }
+                    }
+                    else if (startingEquippedWeapon.def.IsMeleeWeapon)
+                    {
+                        if (HugsLibUtility.HasDesignation(t, CombatTrainingDefOf.TrainCombatDesignation) ||
+                            HugsLibUtility.HasDesignation(t, CombatTrainingDefOf.TrainCombatDesignationMeleeOnly))
+                        {
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        if (HugsLibUtility.HasDesignation(t, CombatTrainingDefOf.TrainCombatDesignation) ||
+                            HugsLibUtility.HasDesignation(t, CombatTrainingDefOf.TrainCombatDesignationRangedOnly))
+                        {
+                            return true;
+                        }
                     }
                 }
             }
@@ -58,11 +104,12 @@ namespace KriilMod_CD
 
         public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn)
         {
+            Func<DesignationDef, bool> filter = getDesignationFilter(pawn);
             List<Designation> desList = pawn.Map.designationManager.allDesignations;
             for (int i = 0; i < desList.Count; i++)
             {
                 Designation des = desList[i];
-                if (des.def == CombatTrainingDefOf.TrainCombatDesignation)
+                if (filter(des.def))
                 {
                     yield return des.target.Thing;
                 }
