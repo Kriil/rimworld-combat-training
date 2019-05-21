@@ -35,19 +35,6 @@
       <li>TrainingWeapons</li>
     </weaponTags>
   </ThingDef>
-
-  <ThingDef Name="BaseBullet" Abstract="True">
-    <category>Projectile</category>
-    <tickerType>Normal</tickerType>
-    <altitudeLayer>Projectile</altitudeLayer>
-    <thingClass>Bullet</thingClass>
-    <label>bullet</label>
-    <useHitPoints>False</useHitPoints>
-    <neverMultiSelect>True</neverMultiSelect>
-    <graphicData>
-      <shaderType>Transparent</shaderType>
-    </graphicData>
-  </ThingDef>
   
   <!--==================================== Melee ====================================-->
 
@@ -101,19 +88,4 @@
     </recipeMaker>
   </ThingDef>
   
- <!--==================================== Neolithic ====================================-->
-
-  <ThingDef Name="BaseProjectileNeolithic" Abstract="True">
-    <category>Projectile</category>
-    <tickerType>Normal</tickerType>
-    <altitudeLayer>Projectile</altitudeLayer>
-    <thingClass>Bullet</thingClass>
-    <label>arrow</label>
-    <useHitPoints>False</useHitPoints>
-    <neverMultiSelect>True</neverMultiSelect>
-    <graphicData>
-      <shaderType>Transparent</shaderType>
-    </graphicData>
-  </ThingDef>
-
 </Defs>
