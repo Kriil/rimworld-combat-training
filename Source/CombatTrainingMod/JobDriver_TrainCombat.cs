@@ -128,9 +128,16 @@ namespace KriilMod_CD
             //if done training jumnp to reequipStartingWeaponLabel
             Toil doneTraining = Toils_Jump.JumpIf(reequipStartingWeaponLabel, delegate
             {
-                if (LearningSaturated()) return true;
-                else return Dummy.Destroyed || Find.TickManager.TicksGame > this.jobStartTick + 5000 ||
-                            designationValidator();
+                SkillRecord skill = GetCurrentSkill();
+
+                if (skill.LearningSaturatedToday || (skill.Level == 20 && skill.xpSinceLastLevel >= skill.XpRequiredForLevelUp - 1))
+                {
+                    return true;
+                }
+                else
+                {
+                    return Dummy.Destroyed || Find.TickManager.TicksGame > this.jobStartTick + 5000 || designationValidator();
+                }
             });
             yield return doneTraining;
             Toil castVerb = Toils_Combat.CastVerb(TargetIndex.A, false);
@@ -182,22 +189,18 @@ namespace KriilMod_CD
         }
 
         /*
-         * Returns true if learning has been saturated for today
+         * Returns the current skill: shooting or melee.
          */
-        private bool LearningSaturated()
+        private SkillRecord GetCurrentSkill()
         {
             Verb verbToUse = pawn.jobs.curJob.verbToUse;
-            // float currentSkill = 0f;
-            bool saturated = false;
-            if (verbToUse.verbProps.IsMeleeAttack)
-            {
-                saturated = pawn.skills.GetSkill(SkillDefOf.Melee).LearningSaturatedToday;
+            if (verbToUse.verbProps.IsMeleeAttack) {
+                return pawn.skills.GetSkill(SkillDefOf.Melee);
             }
             else
             {
-                saturated = pawn.skills.GetSkill(SkillDefOf.Shooting).LearningSaturatedToday;
+                return pawn.skills.GetSkill(SkillDefOf.Shooting);
             }
-            return saturated;
         }
 
         /*
@@ -210,10 +213,12 @@ namespace KriilMod_CD
             if (verbToUse.verbProps.IsMeleeAttack)
             {
                 pawn.skills.Learn(SkillDefOf.Melee, xpGained, false);
+                CombatTrainingTracker.TrackPawnMeleeSkill(pawn, pawn.skills.GetSkill(SkillDefOf.Melee));
             }
             else
             {
                 pawn.skills.Learn(SkillDefOf.Shooting, xpGained, false);
+                CombatTrainingTracker.TrackPawnShootingSkill(pawn, pawn.skills.GetSkill(SkillDefOf.Shooting));
             }
         }
 

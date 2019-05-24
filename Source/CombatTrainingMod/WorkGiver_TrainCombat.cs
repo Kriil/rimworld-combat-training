@@ -41,7 +41,7 @@ namespace KriilMod_CD
             }
             else
             {
-                return pawn.skills.GetSkill(SkillDefOf.Melee).LearningSaturatedToday || pawn.skills.GetSkill(SkillDefOf.Shooting).LearningSaturatedToday;
+                return CombatTrainingTracker.ShouldSkipCombatTraining(pawn);
             }
         }
 
