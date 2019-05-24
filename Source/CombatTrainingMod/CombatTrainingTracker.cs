@@ -119,7 +119,8 @@ namespace KriilMod_CD
 
             return null;
         }
-	}
+    }
+
     public class SkillXpValues
     {
         public int DayOfYear;
