@@ -12,8 +12,8 @@ namespace KriilMod_CD
     /// and then restart them only if they drop below 3000 daily xp.
     /// If they are at level 20 and max out their XP, then they will only train to max xp once on that day.
     /// </summary>
-	public static class CombatTrainingTracker
-	{
+    public static class CombatTrainingTracker
+    {
         private static Dictionary<string, SkillXpValues> PawnMeleeSkillValues = new Dictionary<string, SkillXpValues>();
         private static Dictionary<string, SkillXpValues> PawnShootingSkillValues = new Dictionary<string, SkillXpValues>();
 
@@ -31,8 +31,8 @@ namespace KriilMod_CD
             PawnShootingSkillValues[pawn.ThingID] = new SkillXpValues(dayOfYear, skill.xpSinceMidnight, skill.xpSinceLastLevel);
         }
 
-		public static bool ShouldSkipCombatTraining(Pawn pawn)
-		{
+        public static bool ShouldSkipCombatTraining(Pawn pawn)
+        {
             // Reset the pawn's skill values if it is a new day.
             ClearYesterdaysSkillValues(pawn);
 
@@ -67,7 +67,7 @@ namespace KriilMod_CD
 
             // Otherwise, do not skip training.
             return false;
-		}
+        }
 
         private static void ClearYesterdaysSkillValues(Pawn pawn)
         {
