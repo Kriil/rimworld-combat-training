@@ -34,8 +34,7 @@
         <defaultProjectile>Bullet_TrainingBBGun</defaultProjectile>
         <warmupTime>1.5</warmupTime>
         <range>36.9</range>
-        <soundCast>Interact_BeatFire</soundCast><!---->
-        <soundCastTail>GunTail_Light</soundCastTail>
+        <soundCast>Interact_BeatFire</soundCast>
         <muzzleFlashScale>3</muzzleFlashScale>
       </li>
     </verbs>
