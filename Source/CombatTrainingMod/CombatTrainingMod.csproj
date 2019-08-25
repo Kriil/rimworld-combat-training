@@ -37,6 +37,9 @@
     <Reference Include="Assembly-CSharp">
       <Private>False</Private>
     </Reference>
+    <Reference Include="Hospitality">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="HugsLib">
       <Private>False</Private>
     </Reference>
@@ -54,6 +57,7 @@
     <Compile Include="Building_CombatDummy.cs" />
     <Compile Include="CombatTrainingController.cs" />
     <Compile Include="CombatTrainingDefOf.cs" />
+    <Compile Include="CompatibilityUtility.cs" />
     <Compile Include="Designator_BaseTrainCombat.cs" />
     <Compile Include="Designator_TrainCombatAny.cs" />
     <Compile Include="Designator_TrainCombatMeleeOnly.cs" />
