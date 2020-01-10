@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <TrainCombat.label>战斗训练</TrainCombat.label>
+  <TrainCombat.verb>进行战斗训练</TrainCombat.verb>
+  <TrainCombat.gerund>正在进行战斗训练</TrainCombat.gerund>
+
+
+  <!--<WorkGiverDef>
+		<defName>TrainCombat</defName>
+		<label>train combat</label>
+		<giverClass>KriilMod_CD.WorkGiver_TrainCombat</giverClass>
+		<workType>TrainingCombat</workType>
+		<verb>train combat</verb>
+		<gerund>training combat</gerund>
+		<priorityInType>50</priorityInType>
+		<directOrderable>true</directOrderable>
+		<requiredCapacities>
+			<li>Manipulation</li>
+		</requiredCapacities>
+	</WorkGiverDef>-->
+
+</LanguageData>

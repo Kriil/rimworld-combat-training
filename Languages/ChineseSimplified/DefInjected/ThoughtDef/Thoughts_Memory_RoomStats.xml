@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <TrainedInImpressiveCombatTrainingRoom.stages.3.label>体面的战斗训练室</TrainedInImpressiveCombatTrainingRoom.stages.3.label>
+  <TrainedInImpressiveCombatTrainingRoom.stages.3.description>我在一间体面的战斗训练室进行了一次不错的训练。</TrainedInImpressiveCombatTrainingRoom.stages.3.description>
+  <TrainedInImpressiveCombatTrainingRoom.stages.4.label>令人小有印象的战斗训练室</TrainedInImpressiveCombatTrainingRoom.stages.4.label>
+  <TrainedInImpressiveCombatTrainingRoom.stages.4.description>我在一间令人小有印象的战斗训练室进行了一次不错的训练。</TrainedInImpressiveCombatTrainingRoom.stages.4.description>
+  <TrainedInImpressiveCombatTrainingRoom.stages.5.label>印象有些深刻的战斗训练室</TrainedInImpressiveCombatTrainingRoom.stages.5.label>
+  <TrainedInImpressiveCombatTrainingRoom.stages.5.description>我在一间令人印象有些深刻的训练室进行了一次很棒的训练。</TrainedInImpressiveCombatTrainingRoom.stages.5.description>
+  <TrainedInImpressiveCombatTrainingRoom.stages.6.label>印象非常深刻的战斗训练室</TrainedInImpressiveCombatTrainingRoom.stages.6.label>
+  <TrainedInImpressiveCombatTrainingRoom.stages.6.description>我在一间令人印象非常深刻的训练室进行了一次很棒的训练。</TrainedInImpressiveCombatTrainingRoom.stages.6.description>
+  <TrainedInImpressiveCombatTrainingRoom.stages.7.label>印象极度深刻的战斗训练室</TrainedInImpressiveCombatTrainingRoom.stages.7.label>
+  <TrainedInImpressiveCombatTrainingRoom.stages.7.description>我在一间令人印象极度深刻的训练室进行了一次超赞的训练，我都不想回来了。</TrainedInImpressiveCombatTrainingRoom.stages.7.description>
+  <TrainedInImpressiveCombatTrainingRoom.stages.8.label>难以置信的战斗训练室</TrainedInImpressiveCombatTrainingRoom.stages.8.label>
+  <TrainedInImpressiveCombatTrainingRoom.stages.8.description>我在一间令人难以置信的训练室进行了一次超赞的训练，我都不想回来了。</TrainedInImpressiveCombatTrainingRoom.stages.8.description>
+  <TrainedInImpressiveCombatTrainingRoom.stages.9.label>奇迹非凡的战斗训练室</TrainedInImpressiveCombatTrainingRoom.stages.9.label>
+  <TrainedInImpressiveCombatTrainingRoom.stages.9.description>我在一间最好的训练室进行了一次超赞的训练，我都不想回来了。</TrainedInImpressiveCombatTrainingRoom.stages.9.description>
+
+
+  <!--<ThoughtDef>
+		<defName>TrainedInImpressiveCombatTrainingRoom</defName>
+		<durationDays>1</durationDays>
+		<stackLimit>1</stackLimit>
+		<stages>
+			<li IsNull="True" />
+			<!- - awful - ->
+			<li IsNull="True" />
+			<!- - dull - ->
+			<li IsNull="True" />
+			<!- - mediocre - ->
+			<li>
+				<label>decent combat training room</label>
+				<description>I had a good training session in a decent combat training room.</description>
+				<baseMoodEffect>2</baseMoodEffect>
+			</li>
+			<li>
+				<label>slightly impressive combat training room</label>
+				<description>I had a good training session in a nice combat training room.</description>
+				<baseMoodEffect>3</baseMoodEffect>
+			</li>
+			<li>
+				<label>somewhat impressive combat training room</label>
+				<description>I had a great training session in an impressive combat training room.</description>
+				<baseMoodEffect>4</baseMoodEffect>
+			</li>
+			<li>
+				<label>very impressive combat training room</label>
+				<description>I had a a great training session in a very impressive combat training room.</description>
+				<baseMoodEffect>5</baseMoodEffect>
+			</li>
+			<li>
+				<label>extremely impressive combat training room</label>
+				<description>I had a great training session in an extremely impressive combat training room. I could stay there forever.</description>
+				<baseMoodEffect>6</baseMoodEffect>
+			</li>
+			<li>
+				<label>unbelievably impressive combat training room</label>
+				<description>I had a great training session in an unbelievably impressive combat training room. I could stay there forever.</description>
+				<baseMoodEffect>7</baseMoodEffect>
+			</li>
+			<li>
+				<label>wondrously impressive combat training room</label>
+				<description>I had a great training session in a wonderful combat training room. I could stay there forever.</description>
+				<baseMoodEffect>8</baseMoodEffect>
+			</li>
+		</stages>
+	</ThoughtDef>-->
+
+</LanguageData>
