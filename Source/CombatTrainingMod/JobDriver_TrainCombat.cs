@@ -130,7 +130,7 @@ namespace KriilMod_CD
             {
                 SkillRecord skill = GetCurrentSkill();
 
-                if (skill.LearningSaturatedToday || (skill.Level == 20 && skill.xpSinceLastLevel >= skill.XpRequiredForLevelUp - 1))
+                if (LearningSaturated()) 
                 {
                     return true;
                 }
@@ -188,19 +188,26 @@ namespace KriilMod_CD
             }
         }
 
-        /*
-         * Returns the current skill: shooting or melee.
-         */
-        private SkillRecord GetCurrentSkill()
+        private bool LearningSaturated()
         {
             Verb verbToUse = pawn.jobs.curJob.verbToUse;
+            bool saturated = false;
+            SkillRecord skill;
+
             if (verbToUse.verbProps.IsMeleeAttack) {
-                return pawn.skills.GetSkill(SkillDefOf.Melee);
+                skill = pawn.skills.GetSkill(SkillDefOf.Melee);
             }
             else
             {
-                return pawn.skills.GetSkill(SkillDefOf.Shooting);
+                skill = pawn.skills.GetSkill(SkillDefOf.Shooting);
             }
+
+            if (skill.LearningSaturatedToday || (skill.Level == 20 && skill.xpSinceLastLevel >= skill.XpRequiredForLevelUp - 1))
+            {
+                saturated = true;
+            }
+ 
+            return saturated;
         }
 
         /*
