@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <CommandTrainCombatDesc>用这个假人训练战斗技能。</CommandTrainCombatDesc>
+  <CommandTrainCombatLabel>战斗训练</CommandTrainCombatLabel>
+  <CommandTrainCombatMeleeOnlyDesc>用这个假人训练格斗技能。</CommandTrainCombatMeleeOnlyDesc>
+  <CommandTrainCombatMeleeOnlyLabel>训练格斗</CommandTrainCombatMeleeOnlyLabel>
+  <CommandTrainCombatRangedOnlyDesc>用这个假人训练射击技能。</CommandTrainCombatRangedOnlyDesc>
+  <CommandTrainCombatRangedOnlyLabel>训练射击</CommandTrainCombatRangedOnlyLabel>
+  <MessageMustDesignateCombatDummy>必须指定一个训练假人。</MessageMustDesignateCombatDummy>
+  <DesignatorTrainCombat>战斗训练</DesignatorTrainCombat>
+  <DesignatorTrainCombatDesc>用一个假人训练射击和格斗技能。</DesignatorTrainCombatDesc>
+  <DesignatorTrainCombatMeleeOnly>格斗训练</DesignatorTrainCombatMeleeOnly>
+  <DesignatorTrainCombatMeleeOnlyDesc>用一个假人训练格斗技能。</DesignatorTrainCombatMeleeOnlyDesc>
+  <DesignatorTrainCombatRangedOnly>射击训练</DesignatorTrainCombatRangedOnly>
+  <DesignatorTrainCombatRangedOnlyDesc>用一个假人训练射击技能</DesignatorTrainCombatRangedOnlyDesc>
+  <WorkTagTrainingCombat>正在进行战斗训练</WorkTagTrainingCombat>
+  <PracticedCombatEnoughToday>{1_labelShort}今天已经做了太多的训练了。</PracticedCombatEnoughToday>
+
+</LanguageData>

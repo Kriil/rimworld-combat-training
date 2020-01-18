@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!--<RoomRoleDef>
+    <defName>CombatTrainingRoom</defName>
+    <label>combat training room</label>
+    <workerClass>KriilMod_CD.RoomRoleWorker_CombatTrainingRoom</workerClass>
+    <relatedStats>
+      <li>Beauty</li>
+      <li>Cleanliness</li>
+      <li>Wealth</li>
+      <li>Space</li>
+      <li>Impressiveness</li>
+    </relatedStats>
+  </RoomRoleDef>-->
+
+</LanguageData>
