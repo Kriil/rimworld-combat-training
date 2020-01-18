@@ -1,14 +1,12 @@
 [h1]This mod adds a new work type to let you train your combat skills.  Compatible with RimWorld [1.0][/h1]
 
-Thanks to aph3rson for adding some cool new features to the mod!
+Thanks to Borattata, aph3rson, Heremeus and AtomicGu for bug fixes and enhancements!
 
-[h1]New Feature (05/20): UI enhanced to allow mutiple dummies to be selected and designated[/h1]
-[h1]New Feature (05/20): Ranged-only\Melee-only designations added for combat dummies[/h1]
-[h1]New Feature (05/20): Dummy selection now takes into account the colonist's current weapon[/h1]
-[h1]New Feature (05/20): Weapon selection now takes into account the dummy's designation[/h1]
-[h1]Bug Fix (05/20): A bug was fixed which caused pawns to not retrieve their old weapons if the designation was removed[\h1]
-
-Special thanks goes to @Menhi, kfish#2446, and KongMD#2541 on the Rimworld Discord server who helped @aph3rson with the new features/fixes.
+[h1]Enhancement (1/18 - by Borattata):  Pawns will no longer endlessly try to train combat once they've reached their learning saturation for the day (unless the skill decays an additional 3000xp during the day).[/h1]
+[h1]Bug Fix (1/18 - by aph3rson): Bullets no longer echo.[/h1]
+[h1]Enhancement (1/18 - by aph3rson): BB gun has a new slick blue color.[/h1]
+[h1]Enhancement (1/18 - by Heremeus): Guests will no longer use the training dummies when using Hospitality mode.[/h1]
+[h1]Enhancement (1/18 - by AtomicGu): Chinese Simplified translation added.[/h1]
 
 [h1]Features[/h1]
 • Train your colonist's melee and shooting skills by attacking combat dummies.
@@ -40,4 +38,13 @@ Special thanks goes to @Menhi, kfish#2446, and KongMD#2541 on the Rimworld Disco
 Combat training grants about the same xp as actual combat.  This is balanced by making it a work type. Colonists won't be doing any other work when training combat, plus it costs resources to create a dummy and training weapons.  Additionally, combat training end after skill saturation (4000xp per day for combat skills).
 
 [h1]Contributers[/h1]
-aph3rson, @Menhi, kfish#2446, and KongMD#2541
+aph3rson, @Menhi, kfish#2446, KongMD#2541, Borattata, Heremeus and AtomicGu
+
+Previous Updates:
+[h1]New Feature (05/20): UI enhanced to allow mutiple dummies to be selected and designated.[/h1]
+[h1]New Feature (05/20): Ranged-only\Melee-only designations added for combat dummies.[/h1]
+[h1]New Feature (05/20): Dummy selection now takes into account the colonist's current weapon.[/h1]
+[h1]New Feature (05/20): Weapon selection now takes into account the dummy's designation.[/h1]
+[h1]Bug Fix (05/20): A bug was fixed which caused pawns to not retrieve their old weapons if the designation was removed.[\h1]
+
+Special thanks goes to @Menhi, kfish#2446, and KongMD#2541 on the Rimworld Discord server who helped @aph3rson with the new features/fixes.
