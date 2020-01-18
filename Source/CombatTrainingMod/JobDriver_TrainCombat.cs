@@ -128,8 +128,6 @@ namespace KriilMod_CD
             //if done training jumnp to reequipStartingWeaponLabel
             Toil doneTraining = Toils_Jump.JumpIf(reequipStartingWeaponLabel, delegate
             {
-                SkillRecord skill = GetCurrentSkill();
-
                 if (LearningSaturated()) 
                 {
                     return true;
