@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Building_CombatDummy.cs" />
+    <Compile Include="CombatTrainingTracker.cs" />
     <Compile Include="CombatTrainingController.cs" />
     <Compile Include="CombatTrainingDefOf.cs" />
     <Compile Include="Designator_BaseTrainCombat.cs" />
