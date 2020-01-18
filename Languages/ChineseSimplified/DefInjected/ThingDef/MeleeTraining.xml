@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <MeleeWeapon_TrainingKnife.label>训练用匕首</MeleeWeapon_TrainingKnife.label>
+  <MeleeWeapon_TrainingKnife.description>一把木制的钝匕首，用于格斗训练。</MeleeWeapon_TrainingKnife.description>
+  <MeleeWeapon_TrainingKnife.tools.0.label>柄</MeleeWeapon_TrainingKnife.tools.0.label>
+  <MeleeWeapon_TrainingKnife.tools.1.label>刀刃</MeleeWeapon_TrainingKnife.tools.1.label>
+  <MeleeWeapon_TrainingKnife.tools.2.label>刀尖</MeleeWeapon_TrainingKnife.tools.2.label>
+
+
+</LanguageData>

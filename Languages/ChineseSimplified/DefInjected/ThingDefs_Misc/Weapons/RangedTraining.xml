@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<Defs>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
 
-  <ThingDef ParentName="BaseHumanMakeableTrainingGun">
+  <!--<ThingDef ParentName="BaseHumanMakeableTrainingGun">
     <defName>Gun_TrainingBBGun</defName>
     <label>training BB gun</label>
     <description>A simple BB gun used for training ranged combat skills.</description>
     <graphicData>
-      <texPath>CombatTrainingBBGun</texPath>
+      <texPath>Things/Item/Equipment/WeaponRanged/BoltActionRifle</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <soundInteract>Interact_Rifle</soundInteract>
@@ -34,7 +34,8 @@
         <defaultProjectile>Bullet_TrainingBBGun</defaultProjectile>
         <warmupTime>1.5</warmupTime>
         <range>36.9</range>
-        <soundCast>Interact_BeatFire</soundCast>
+        <soundCast>Interact_BeatFire</soundCast><!- - - ->
+        <soundCastTail>GunTail_Light</soundCastTail>
         <muzzleFlashScale>3</muzzleFlashScale>
       </li>
     </verbs>
@@ -57,8 +58,8 @@
         <cooldownTime>2</cooldownTime>
       </li>
     </tools>
-  </ThingDef>
-  <ThingDef ParentName="BaseBullet">
+  </ThingDef>-->
+  <!--<ThingDef ParentName="BaseBullet">
     <defName>Bullet_TrainingBBGun</defName>
     <label>BB gun bullet</label>
     <projectile>
@@ -71,9 +72,9 @@
       <texPath>Things/Projectile/Bullet_Small</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
-  </ThingDef>
-  
-  <ThingDef ParentName="BaseWeapon">
+  </ThingDef>-->
+
+  <!--<ThingDef ParentName="BaseWeapon">
     <defName>Bow_TrainingShort</defName>
     <label>training bow</label>
     <description>A simple bow made from a single piece of wood.  Very weak pull and designed for shooting blunt point arrows to train ranged combat skill.</description>
@@ -130,8 +131,8 @@
         <cooldownTime>2</cooldownTime>
       </li>
     </tools>
-  </ThingDef>
-  <ThingDef ParentName="BaseProjectileNeolithic">
+  </ThingDef>-->
+  <!--<ThingDef ParentName="BaseProjectileNeolithic">
     <defName>Arrow_BluntPoint</defName>
     <label>blunt point arrow</label>
     <graphicData>
@@ -144,6 +145,6 @@
       <damageAmountBase>0</damageAmountBase>
       <speed>44</speed>
     </projectile>
-  </ThingDef>
-  
-</Defs>
+  </ThingDef>-->
+
+</LanguageData>
