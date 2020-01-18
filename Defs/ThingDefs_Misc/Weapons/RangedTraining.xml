@@ -6,7 +6,7 @@
     <label>training BB gun</label>
     <description>A simple BB gun used for training ranged combat skills.</description>
     <graphicData>
-      <texPath>Things/Item/Equipment/WeaponRanged/BoltActionRifle</texPath>
+      <texPath>CombatTrainingBBGun</texPath>
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
     <soundInteract>Interact_Rifle</soundInteract>
