@@ -35,6 +35,11 @@ namespace KriilMod_CD
 
         public override bool ShouldSkip(Pawn pawn, bool forced = false)
         {
+            if (CompatibilityUtility.IsGuest(pawn))
+            {
+                return true;
+            }
+
             if (forced)
             {
                 return pawn.story.WorkTagIsDisabled(WorkTags.Violent);
