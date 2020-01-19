@@ -6,15 +6,13 @@
   <description><![CDATA[
 <size=16><b>This mod adds a new work type to let you train your combat skills.  Compatible with RimWorld [1.0]</b></size>
 
-<size=16><b>Thanks to aph3rson for adding some cool new features to the mod!</b></size>
+<size=16><b>Thanks to Borattata, aph3rson, Heremeus and AtomicGu for bug fixes and enhancements!</b></size>
 
-<size=16><b>New Feature (05/20): UI enhanced to allow mutiple dummies to be selected and designated</b></size>
-<size=16><b>New Feature (05/20): Ranged-only\Melee-only designations added for combat dummies</b></size>
-<size=16><b>New Feature (05/20): Dummy selection now takes into account the colonist's current weapon</b></size>
-<size=16><b>New Feature (05/20): Weapon selection now takes into account the dummy's designation</b></size>
-<size=16><b>Bug Fix (05/20): A bug was fixed which caused pawns to not retrieve their old weapons if the designation was removed</b></size>
-
-<size=16><b>Special thanks goes to @Menhi, kfish#2446, and KongMD#2541 on the Rimworld Discord server who helped @aph3rson with the new features/fixes.</b></size>
+<size=16><b>Enhancement (1/18 - by Borattata): Pawns will no longer endlessly try to train combat once they've reached their learning saturation for the day (unless the skill decays an additional 3000xp during the day).</b></size>
+<size=16><b>Bug Fix (1/18 - by aph3rson): Bullets no longer echo.</b></size>
+<size=16><b>Enhancement (1/18 - by aph3rson): BB gun has a new slick blue color.</b></size>
+<size=16><b>Enhancement (1/18 - by Heremeus): Guests will no longer use the training dummies when using Hospitality mode.</b></size>
+<size=16><b>Enhancement (1/18 - by AtomicGu): Chinese Simplified translation added.</b></size>
 
 <size=16><color=orange>Features</color></size>
 • Train your colonist's melee and shooting skills by attacking combat dummies.
@@ -42,15 +40,25 @@
 • While training, colonists will take a quick break to check for other jobs or satisfy needs.  This causes them to switch back to their old weapon and if there are no jobs or needs, the colonist picks up the training weapon again and continues training.
 • Colonists won't train if their skill level has been saturated for the day (4000xp).  For a colonist with burning passion, this takes about 2 hours, for a colonist with passion about 3 hours and for one with no passion, saturation takes all day.
 
-<size=16><color=orange>Contributers</color></size>
-aph3rson, @Menhi, kfish#2446, and KongMD#2541
-
 <size=16><color=red>Possible Issues and Fixes:</color></size>
 Combat dummies and training weapons have been altered a bit to add new features.  If you subscribed to the mod in between updates, combat dummies or training weapons in saved games may have the wrong attributes. Crafting a new dummy or weapon should resolve any issues.
   
 <size=16><color=orange>Balancing</color></size>
 Combat training grants about the same xp as actual combat.  This is balanced by making it a work type. Colonists won't be doing any other work when training combat, plus it costs resources to create a dummy and training weapons.  Additionally, combat training end after skill saturation (4000xp per day for combat skills).
+
+<size=16><color=orange>Contributers</color></size>
+aph3rson, @Menhi, kfish#2446, KongMD#2541, Borattata, Heremeus and AtomicGu
+
+<size=16><color=orange>Previous Updates</color></size>
+<size=16><b>New Feature (05/20): UI enhanced to allow mutiple dummies to be selected and designated</b></size>
+<size=16><b>New Feature (05/20): Ranged-only\Melee-only designations added for combat dummies</b></size>
+<size=16><b>New Feature (05/20): Dummy selection now takes into account the colonist's current weapon</b></size>
+<size=16><b>New Feature (05/20): Weapon selection now takes into account the dummy's designation</b></size>
+<size=16><b>Bug Fix (05/20): A bug was fixed which caused pawns to not retrieve their old weapons if the designation was removed</b></size>
+
+Special thanks goes to @Menhi, kfish#2446, and KongMD#2541 on the Rimworld Discord server who helped @aph3rson with the new features/fixes.
 ]]>
+
 </description>
-  <targetVersion>1.0.2059</targetVersion>
+  <supportedVersions><li>1.0</li></supportedVersions>
 </ModMetaData>
