@@ -14,30 +14,29 @@ namespace KriilMod_CD
 
         public static bool IsGuest(Pawn pawn)
         {
-            if(!HospitalityEnabled)
+            bool isGuest = false;
+            if (HospitalityEnabled)
             {
-                return false;
-            }
-
-            try
-            {
-                bool isGuest = ((Func<bool>)(() =>
+                try
                 {
-                    // Copied from Hospitality.GuestUtility
-                    if (!IsValidGuestPawn(pawn)) return false;
+                    isGuest = ((Func<bool>)(() =>
+                    {
+                        // Copied from Hospitality.GuestUtility
+                        if (!IsValidGuestPawn(pawn)) return false;
 
-                    var compGuest = pawn?.GetComp<Hospitality.CompGuest>();
-                    var lord = compGuest?.lord;
-                    var job = lord?.LordJob;
-                    return job is LordJob_VisitColony;
-                }))();
-                return isGuest;
+                        var compGuest = pawn?.GetComp<Hospitality.CompGuest>();
+                        var lord = compGuest?.lord;
+                        var job = lord?.LordJob;
+                        return job is LordJob_VisitColony;
+                    }))();
+                    
+                }
+                catch (TypeLoadException ex)
+                {
+                    Log.Warning("Failed to check whether ped is a guest. " + ex.Message);
+                }
             }
-            catch (TypeLoadException ex)
-            {
-                Log.Warning("Failed to check whether ped is a guest.");
-                return false;
-            }
+            return isGuest;
         }
 
         private static bool IsValidGuestPawn(this Pawn pawn)

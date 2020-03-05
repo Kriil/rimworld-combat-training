@@ -3,7 +3,6 @@ using RimWorld;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using HugsLib.Core;
 using HugsLib.Utils;
 using Verse;
 using Verse.AI;
@@ -14,6 +13,7 @@ namespace KriilMod_CD
     public class JobDriver_TrainCombat : JobDriver
     {
         private int jobStartTick = -1;
+        
 
         private static readonly float trainCombatLearningFactor = .15f;
 
@@ -51,7 +51,7 @@ namespace KriilMod_CD
             //fail if can't do violence
             base.AddFailCondition(delegate
             {
-                return this.pawn.story.WorkTagIsDisabled(WorkTags.Violent);
+                return this.pawn.WorkTagIsDisabled(WorkTags.Violent);
             });
 
             this.jobStartTick = Find.TickManager.TicksGame;

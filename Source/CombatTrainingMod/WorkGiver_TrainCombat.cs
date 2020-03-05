@@ -42,7 +42,7 @@ namespace KriilMod_CD
 
             if (forced)
             {
-                return pawn.story.WorkTagIsDisabled(WorkTags.Violent);
+                return pawn.WorkTagIsDisabled(WorkTags.Violent);
             }
             else
             {
@@ -52,7 +52,7 @@ namespace KriilMod_CD
 
         public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
-            if (pawn.story.WorkTagIsDisabled(WorkTags.Violent))
+            if (pawn.WorkTagIsDisabled(WorkTags.Violent))
             {
                 JobFailReason.Is(null, "IsIncapableOfViolence".Translate());
                 return false;
