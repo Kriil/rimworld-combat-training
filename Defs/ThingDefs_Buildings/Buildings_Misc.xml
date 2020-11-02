@@ -40,7 +40,6 @@
       <li>Stony</li>
     </stuffCategories>
     <comps>
-      <li Class="CompProperties_Breakdownable"/>
       <li Class="CompProperties_Forbiddable" />
     </comps>
     <designationCategory>Misc</designationCategory>
