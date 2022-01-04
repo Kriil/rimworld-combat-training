@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-
   <!--<ThingDef ParentName="BaseMeleeTrainingWeapon_Sharp">
 		<defName>MeleeWeapon_TrainingKnife</defName>
 		<label>training knife</label>
@@ -54,5 +53,4 @@
       </recipeUsers>
     </recipeMaker>
 	</ThingDef>-->
-
 </LanguageData>

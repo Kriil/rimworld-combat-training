@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-
   <!--<DesignationCategoryDef>
     <defName>Orders</defName>
     <label>orders</label>
@@ -27,5 +26,4 @@
       <li>Designator_PlanRemove</li>
     </specialDesignatorClasses>
   </DesignationCategoryDef>-->
-
 </LanguageData>

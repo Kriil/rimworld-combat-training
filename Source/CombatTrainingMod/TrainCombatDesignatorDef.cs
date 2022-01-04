@@ -6,10 +6,10 @@ namespace KriilMod_CD
 {
     public class TrainCombatDesignatorDef : Def
     {
-        public string iconTexture;
-        public string dragHighlightTexture;
-        public bool Injected { get; set; }
         public Type designatorClass;
+        public string dragHighlightTexture;
+        public string iconTexture;
+        public bool Injected { get; set; }
 
         public DesignationCategoryDef Category { get; private set; }
 
@@ -20,11 +20,11 @@ namespace KriilMod_CD
         public override void ResolveReferences()
         {
             base.ResolveReferences();
-            this.Category = DefDatabase<DesignationCategoryDef>.GetNamed(this.defName, true);
-            LongEventHandler.ExecuteWhenFinished(delegate ()
+            Category = DefDatabase<DesignationCategoryDef>.GetNamed(defName);
+            LongEventHandler.ExecuteWhenFinished(delegate
             {
-                this.IconTexture = ContentFinder<Texture2D>.Get(this.iconTexture, true);
-                this.DragHighlightTex = ContentFinder<Texture2D>.Get(this.dragHighlightTexture, true);
+                IconTexture = ContentFinder<Texture2D>.Get(iconTexture);
+                DragHighlightTex = ContentFinder<Texture2D>.Get(dragHighlightTexture);
             });
         }
     }

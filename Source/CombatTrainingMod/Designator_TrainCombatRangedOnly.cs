@@ -7,10 +7,10 @@ namespace KriilMod_CD
     {
         public Designator_TrainCombatRangedOnly()
         {
-            this.defaultLabel = "DesignatorTrainCombatRangedOnly".Translate();
-            this.defaultDesc = "DesignatorTrainCombatRangedOnlyDesc".Translate();
-            this.icon = icon = TexCommand.Attack;
-            this.defOf = CombatTrainingDefOf.TrainCombatDesignationRangedOnly;
+            defaultLabel = "DesignatorTrainCombatRangedOnly".Translate();
+            defaultDesc = "DesignatorTrainCombatRangedOnlyDesc".Translate();
+            icon = icon = TexCommand.Attack;
+            defOf = CombatTrainingDefOf.TrainCombatDesignationRangedOnly;
         }
     }
 }

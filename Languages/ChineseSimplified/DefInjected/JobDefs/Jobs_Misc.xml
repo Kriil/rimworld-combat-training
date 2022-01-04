@@ -1,11 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-
   <!--<JobDef>
     <defName>TrainOnCombatDummy</defName>
     <driverClass>KriilMod_CD.JobDriver_TrainCombat</driverClass>
     <reportString>training on combat dummy.</reportString>
     <alwaysShowWeapon>true</alwaysShowWeapon>
   </JobDef>-->
-
 </LanguageData>

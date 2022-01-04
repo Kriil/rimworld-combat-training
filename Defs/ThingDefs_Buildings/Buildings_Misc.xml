@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
   <ThingDef ParentName="BuildingBase">
     <defName>CombatDummy</defName>
@@ -19,7 +19,7 @@
       <drawSize>1.2</drawSize>
     </graphicData>
     <defaultPlacingRot>South</defaultPlacingRot>
-    <castEdgeShadows>false</castEdgeShadows>    
+    <castEdgeShadows>false</castEdgeShadows>
     <altitudeLayer>Building</altitudeLayer>
     <minifiedDef>MinifiedThing</minifiedDef>
     <thingCategories>
@@ -48,5 +48,5 @@
     <passability>PassThroughOnly</passability>
     <pathCost>70</pathCost>
     <canOverlapZones>false</canOverlapZones>
-  </ThingDef>  
+  </ThingDef>
 </Defs>

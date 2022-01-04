@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-
   <!--<DesignationDef>
     <!- - Leaving named the same to ensure backwards compatibility - ->
     <defName>TrainCombatDesignation</defName>
@@ -23,5 +22,4 @@
     <removeIfBuildingDespawned>true</removeIfBuildingDespawned>
     <designateCancelable>false</designateCancelable>
   </DesignationDef>-->
-
 </LanguageData>

@@ -1,12 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-
   <CombatDummy.label>训练假人</CombatDummy.label>
   <CombatDummy.description>用于格斗和射击训练的假人。</CombatDummy.description>
   <CombatDummy_Blueprint.label>训练假人（蓝图）</CombatDummy_Blueprint.label>
   <CombatDummy_Blueprint_Install.label>训练假人（蓝图）</CombatDummy_Blueprint_Install.label>
   <CombatDummy_Frame.label>训练假人（建造中）</CombatDummy_Frame.label>
   <CombatDummy_Frame.description>用于格斗和射击训练的假人。</CombatDummy_Frame.description>
-
-
 </LanguageData>

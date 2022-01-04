@@ -1,9 +1,8 @@
-using System;
-using RimWorld;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using HugsLib.Utils;
+using RimWorld;
 using Verse;
 using Verse.AI;
 using Verse.Sound;
@@ -12,160 +11,148 @@ namespace KriilMod_CD
 {
     public class JobDriver_TrainCombat : JobDriver
     {
-        private int jobStartTick = -1;
-        
-
         private static readonly float trainCombatLearningFactor = .15f;
+        private int jobStartTick = -1;
 
-        public Thing Dummy
-        {
-            get
-            {
-                return this.job.GetTarget(TargetIndex.A).Thing;
-            }
-        }
+        public Thing Dummy => job.GetTarget(TargetIndex.A).Thing;
 
         public override void ExposeData()
         {
             base.ExposeData();
-            Scribe_Values.Look<int>(ref this.jobStartTick, "jobStartTick", 0, false);
+            Scribe_Values.Look(ref jobStartTick, "jobStartTick");
         }
 
         public override string GetReport()
         {
-            if (this.Dummy != null)
+            if (Dummy != null)
             {
-                return this.job.def.reportString.Replace("TargetA", this.Dummy.LabelShort);
+                return job.def.reportString.Replace("TargetA", Dummy.LabelShort);
             }
+
             return base.GetReport();
         }
 
         public override bool TryMakePreToilReservations(bool errorOnFailed)
         {
-            return ReservationUtility.Reserve(pawn, this.job.GetTarget(TargetIndex.A), this.job, 1, -1, null);
+            return pawn.Reserve(job.GetTarget(TargetIndex.A), job);
         }
 
         [DebuggerHidden]
         protected override IEnumerable<Toil> MakeNewToils()
         {
             //fail if can't do violence
-            base.AddFailCondition(delegate
+            AddFailCondition(() => pawn.WorkTagIsDisabled(WorkTags.Violent));
+
+            jobStartTick = Find.TickManager.TicksGame;
+
+            bool DesignationValidator()
             {
-                return this.pawn.WorkTagIsDisabled(WorkTags.Violent);
-            });
+                return !(
+                    // Dummy must have the any designation
+                    TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignation) ||
+                    // Dummy must have the melee designation, and the pawn has a melee weapon held
+                    TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationMeleeOnly) &&
+                    pawn.equipment.Primary.def.IsMeleeWeapon ||
+                    // Dummy must have the ranged designation, and the pawn has a ranged weapon held
+                    TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationRangedOnly) &&
+                    pawn.equipment.Primary.def.IsRangedWeapon ||
+                    // Dummy must have any designation, and the pawn is unarmed.
+                    (TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignation) ||
+                     TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationMeleeOnly) ||
+                     TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationRangedOnly)) &&
+                    pawn.equipment.Primary == null);
+            }
 
-            this.jobStartTick = Find.TickManager.TicksGame;
-
-            Func<bool> designationValidator = () => !(
-                // Dummy must have the any designation
-                TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignation)
-                ||
-                // Dummy must have the melee designation, and the pawn has a melee weapon held
-                TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationMeleeOnly) &&
-                pawn.equipment.Primary.def.IsMeleeWeapon
-                ||
-                // Dummy must have the ranged designation, and the pawn has a ranged weapon held
-                TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationRangedOnly) &&
-                pawn.equipment.Primary.def.IsRangedWeapon
-                ||
-                // Dummy must have any designation, and the pawn is unarmed.
-                (TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignation) ||
-                 TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationMeleeOnly) ||
-                 TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationRangedOnly)) &&
-                pawn.equipment.Primary == null);
-            
             //make sure thing has train combat designation
-            if (designationValidator())
+            if (DesignationValidator())
             {
                 yield break;
             }
 
             // Make sure our dummy isn't already in use
             this.FailOnSomeonePhysicallyInteracting(TargetIndex.A);
-            
+
             //fail if dummy is despawned null or forbidden
             this.FailOnDespawnedNullOrForbidden(TargetIndex.A);
 
             /**** START SWITCH TO TRAINING WEAPON ****/
             //Pick up a training weapon if one is nearby. Remember previous weapon     
-            ThingWithComps startingEquippedWeapon = this.pawn.equipment.Primary;
+            var startingEquippedWeapon = pawn.equipment.Primary;
             ThingWithComps trainingWeapon = null;
 
-            if (startingEquippedWeapon == null || !startingEquippedWeapon.def.IsWithinCategory(CombatTrainingDefOf.TrainingWeapons))
+            if (startingEquippedWeapon == null ||
+                !startingEquippedWeapon.def.IsWithinCategory(CombatTrainingDefOf.TrainingWeapons))
             {
                 trainingWeapon = GetNearestTrainingWeapon(startingEquippedWeapon);
                 if (trainingWeapon != null && !trainingWeapon.IsForbidden(pawn))
                 {
                     //reserve training weapon, goto, and equip
-                    if (this.Map.reservationManager.CanReserve(this.pawn, trainingWeapon, 1, -1, null, false))
+                    if (Map.reservationManager.CanReserve(pawn, trainingWeapon))
                     {
-                        this.pawn.Reserve(trainingWeapon, this.job, 1, -1, null, true);
-                        this.job.SetTarget(TargetIndex.B, trainingWeapon);
-                        yield return Toils_Goto.GotoThing(TargetIndex.B, PathEndMode.ClosestTouch).FailOnDespawnedNullOrForbidden(TargetIndex.B);
+                        pawn.Reserve(trainingWeapon, job);
+                        job.SetTarget(TargetIndex.B, trainingWeapon);
+                        yield return Toils_Goto.GotoThing(TargetIndex.B, PathEndMode.ClosestTouch)
+                            .FailOnDespawnedNullOrForbidden(TargetIndex.B);
                         yield return CreateEquipToil(TargetIndex.B);
                     }
 
                     //reserve previous weapon and set as target c
-                    if (this.Map.reservationManager.CanReserve(this.pawn, startingEquippedWeapon, 1, -1, null, false))
+                    if (Map.reservationManager.CanReserve(pawn, startingEquippedWeapon))
                     {
-                        this.pawn.Reserve(startingEquippedWeapon, this.job, 1, -1, null, true);
-                        this.job.SetTarget(TargetIndex.C, startingEquippedWeapon);
+                        pawn.Reserve(startingEquippedWeapon, job);
+                        job.SetTarget(TargetIndex.C, startingEquippedWeapon);
                     }
                 }
             }
-            Toil reequipStartingWeaponLabel = Toils_General.Label();
+
+            var reequipStartingWeaponLabel = Toils_General.Label();
             /**** END SWITCH TO TRAINING WEAPON ****/
 
             //set the job's attack verb to melee or shooting - needed to gotoCastPosition or stack overflow occurs
             yield return Toils_Combat.TrySetJobToUseAttackVerb(TargetIndex.A);
             //based on attack verb, go to cast position
-            Toil gotoCastPos = Toils_Combat.GotoCastPosition(TargetIndex.A, true, 0.95f).EndOnDespawnedOrNull(TargetIndex.A);
+            var gotoCastPos = Toils_Combat.GotoCastPosition(TargetIndex.A, TargetIndex.B, true, 0.95f)
+                .EndOnDespawnedOrNull(TargetIndex.A);
             yield return gotoCastPos;
             //try going to new cast position if the target can't be hit from current position
             yield return Toils_Jump.JumpIfTargetNotHittable(TargetIndex.A, gotoCastPos);
 
             //training loop - jump if done training -> cast verb -> jump to done training
             //if done training jumnp to reequipStartingWeaponLabel
-            Toil doneTraining = Toils_Jump.JumpIf(reequipStartingWeaponLabel, delegate
+            var doneTraining = Toils_Jump.JumpIf(reequipStartingWeaponLabel, delegate
             {
-                if (LearningSaturated()) 
+                if (LearningSaturated())
                 {
                     return true;
                 }
-                else
-                {
-                    return Dummy.Destroyed || Find.TickManager.TicksGame > this.jobStartTick + 5000 || designationValidator();
-                }
+
+                return Dummy.Destroyed || Find.TickManager.TicksGame > jobStartTick + 5000 || DesignationValidator();
             });
             yield return doneTraining;
-            Toil castVerb = Toils_Combat.CastVerb(TargetIndex.A, false);
-            castVerb.AddFinishAction(delegate
-            {
-                LearnAttackSkill();
-            });
+            var castVerb = Toils_Combat.CastVerb(TargetIndex.A, false);
+            castVerb.AddFinishAction(LearnAttackSkill);
             yield return castVerb;
             yield return Toils_Jump.Jump(doneTraining);
             yield return reequipStartingWeaponLabel;
             //gain room buff
-            yield return Toils_General.Do(delegate
-            {
-                TryGainCombatTrainingRoomThought();
-            });
+            yield return Toils_General.Do(TryGainCombatTrainingRoomThought);
             //equip strating weapon
-            if (trainingWeapon != null && startingEquippedWeapon != null)
+            if (trainingWeapon == null || startingEquippedWeapon == null)
             {
-                yield return Toils_Goto.GotoThing(TargetIndex.C, PathEndMode.ClosestTouch).FailOnDespawnedNullOrForbidden(TargetIndex.C);
-                yield return CreateEquipToil(TargetIndex.C);
+                yield break;
             }
-            yield break;
+
+            yield return Toils_Goto.GotoThing(TargetIndex.C, PathEndMode.ClosestTouch)
+                .FailOnDespawnedNullOrForbidden(TargetIndex.C);
+            yield return CreateEquipToil(TargetIndex.C);
         }
 
         /*
          * Calculates the xp gained. seems like shooting was based off 170f and melee of 200f. Just used 200f for consistency
          */
-        private float CalculateXp(Verb verb, Pawn pawn)
+        private float CalculateXp(Verb verb, Pawn localPawn)
         {
-            return trainCombatLearningFactor * 200f * verb.verbProps.AdjustedFullCycleTime(verb, pawn);
+            return trainCombatLearningFactor * 200f * verb.verbProps.AdjustedFullCycleTime(verb, localPawn);
         }
 
         /*
@@ -173,38 +160,39 @@ namespace KriilMod_CD
          */
         private void TryGainCombatTrainingRoomThought()
         {
-            Room room = pawn.GetRoom(RegionType.Set_Passable);
-            if (room != null)
+            var room = pawn.GetRoom(RegionType.Set_Passable);
+            if (room == null)
             {
-                //get the impressive stage index for the current room
-                int scoreStageIndex = RoomStatDefOf.Impressiveness.GetScoreStageIndex(room.GetStat(RoomStatDefOf.Impressiveness));
-                //if the stage index exists in the definition (in xml), gain the memory (and buff)
-                if (CombatTrainingDefOf.TrainedInImpressiveCombatTrainingRoom.stages[scoreStageIndex] != null)
-                {
-                    pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtMaker.MakeThought(CombatTrainingDefOf.TrainedInImpressiveCombatTrainingRoom, scoreStageIndex), null);
-                }
+                return;
+            }
+
+            //get the impressive stage index for the current room
+            var scoreStageIndex =
+                RoomStatDefOf.Impressiveness.GetScoreStageIndex(room.GetStat(RoomStatDefOf.Impressiveness));
+            //if the stage index exists in the definition (in xml), gain the memory (and buff)
+            if (CombatTrainingDefOf.TrainedInImpressiveCombatTrainingRoom.stages[scoreStageIndex] != null)
+            {
+                pawn.needs.mood.thoughts.memories.TryGainMemory(
+                    ThoughtMaker.MakeThought(CombatTrainingDefOf.TrainedInImpressiveCombatTrainingRoom,
+                        scoreStageIndex));
             }
         }
 
         private bool LearningSaturated()
         {
-            Verb verbToUse = pawn.jobs.curJob.verbToUse;
-            bool saturated = false;
-            SkillRecord skill;
+            var verbToUse = pawn.jobs.curJob.verbToUse;
+            var saturated = false;
 
-            if (verbToUse.verbProps.IsMeleeAttack) {
-                skill = pawn.skills.GetSkill(SkillDefOf.Melee);
-            }
-            else
-            {
-                skill = pawn.skills.GetSkill(SkillDefOf.Shooting);
-            }
+            var skill = pawn.skills.GetSkill(verbToUse.verbProps.IsMeleeAttack
+                ? SkillDefOf.Melee
+                : SkillDefOf.Shooting);
 
-            if (skill.LearningSaturatedToday || (skill.Level == 20 && skill.xpSinceLastLevel >= skill.XpRequiredForLevelUp - 1))
+            if (skill.LearningSaturatedToday ||
+                skill.Level == 20 && skill.xpSinceLastLevel >= skill.XpRequiredForLevelUp - 1)
             {
                 saturated = true;
             }
- 
+
             return saturated;
         }
 
@@ -213,25 +201,27 @@ namespace KriilMod_CD
          */
         private void LearnAttackSkill()
         {
-            Verb verbToUse = pawn.jobs.curJob.verbToUse;
-            float xpGained = CalculateXp(verbToUse, pawn);
+            var verbToUse = pawn.jobs.curJob.verbToUse;
+            var xpGained = CalculateXp(verbToUse, pawn);
             if (verbToUse.verbProps.IsMeleeAttack)
             {
-                pawn.skills.Learn(SkillDefOf.Melee, xpGained, false);
+                pawn.skills.Learn(SkillDefOf.Melee, xpGained);
                 CombatTrainingTracker.TrackPawnMeleeSkill(pawn, pawn.skills.GetSkill(SkillDefOf.Melee));
             }
             else
             {
-                pawn.skills.Learn(SkillDefOf.Shooting, xpGained, false);
+                pawn.skills.Learn(SkillDefOf.Shooting, xpGained);
                 CombatTrainingTracker.TrackPawnShootingSkill(pawn, pawn.skills.GetSkill(SkillDefOf.Shooting));
             }
         }
 
-        
+
         private ThingWithComps GetNearestTrainingWeaponOfType(ThingDef weaponType)
         {
-            ThingRequest request = ThingRequest.ForDef(weaponType);
-            ThingWithComps nearestTrainingWeapon = (ThingWithComps)GenClosest.RegionwiseBFSWorker(this.TargetA.Thing.Position, pawn.Map, request, PathEndMode.OnCell, TraverseParms.For(pawn, Danger.Deadly, TraverseMode.ByPawn, false), (Thing x) => pawn.CanReserve(x, 1, -1, null, false), null, 0, 12, 50f, out int regionsSearched, RegionType.Set_Passable, true);
+            var request = ThingRequest.ForDef(weaponType);
+            var nearestTrainingWeapon = (ThingWithComps)GenClosest.RegionwiseBFSWorker(TargetA.Thing.Position, pawn.Map,
+                request, PathEndMode.OnCell, TraverseParms.For(pawn), x => pawn.CanReserve(x), null, 0, 12, 50f,
+                out _, RegionType.Set_Passable, true);
             return nearestTrainingWeapon;
         }
 
@@ -250,12 +240,15 @@ namespace KriilMod_CD
                 weaponType = CombatTrainingDefOf.Gun_TrainingBBGun;
                 nearestTrainingWeapon = GetNearestTrainingWeaponOfType(weaponType);
             }
+
             // If no BB gun was found (perhaps due to tech level), look for a bow.
-            if (nearestTrainingWeapon == null)
+            if (nearestTrainingWeapon != null)
             {
-                weaponType = CombatTrainingDefOf.Bow_TrainingShort;
-                nearestTrainingWeapon = GetNearestTrainingWeaponOfType(weaponType);
+                return nearestTrainingWeapon;
             }
+
+            weaponType = CombatTrainingDefOf.Bow_TrainingShort;
+            nearestTrainingWeapon = GetNearestTrainingWeaponOfType(weaponType);
 
             return nearestTrainingWeapon;
         }
@@ -267,42 +260,45 @@ namespace KriilMod_CD
         private ThingWithComps GetNearestTrainingWeapon(Thing currentWeapon)
         {
             ThingWithComps nearestTrainingWeapon = null;
-            
+
             // If the pawn has a melee weapon, look for a training knife.
             if (currentWeapon != null && currentWeapon.def.IsMeleeWeapon)
             {
                 nearestTrainingWeapon = GetNearestTrainingWeaponMelee();
             }
+
             // If the pawn has a ranged weapon, look for a training ranged weapon.
             if (currentWeapon != null && !currentWeapon.def.IsMeleeWeapon)
             {
                 nearestTrainingWeapon = GetNearestTrainingWeaponRanged();
             }
-            
+
             // If the pawn does not have a weapon, and the dummy is restricted, look for the appropriate weapon type.
-            if (currentWeapon == null && !this.TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignation))
+            if (currentWeapon == null && !TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignation))
             {
-                if (this.TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationMeleeOnly))
+                if (TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationMeleeOnly))
                 {
                     nearestTrainingWeapon = GetNearestTrainingWeaponMelee();
                 }
-                else if (this.TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationRangedOnly))
+                else if (TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationRangedOnly))
                 {
                     nearestTrainingWeapon = GetNearestTrainingWeaponRanged();
                 }
             }
-            
+
             // If the pawn does not have a weapon, and the dummy is not restricted, look for the closest training weapon of any kind.
-            if (currentWeapon == null && this.TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignation))
+            if (currentWeapon != null || !TargetThingA.HasDesignation(CombatTrainingDefOf.TrainCombatDesignation))
             {
-                ThingRequest request = ThingRequest.ForGroup(ThingRequestGroup.Weapon);
-                nearestTrainingWeapon = (ThingWithComps) GenClosest.RegionwiseBFSWorker(this.TargetA.Thing.Position,
-                    pawn.Map, request, PathEndMode.OnCell,
-                    TraverseParms.For(pawn, Danger.Deadly, TraverseMode.ByPawn, false),
-                    (Thing x) => CombatTrainingDefOf.TrainingWeapons.DescendantThingDefs.Contains(x.def) &&
-                                 pawn.CanReserve(x, 1, -1, null, false), null, 0, 12, 50f, out int regionsSearched,
-                    RegionType.Set_Passable, true);
+                return nearestTrainingWeapon;
             }
+
+            var request = ThingRequest.ForGroup(ThingRequestGroup.Weapon);
+            nearestTrainingWeapon = (ThingWithComps)GenClosest.RegionwiseBFSWorker(TargetA.Thing.Position,
+                pawn.Map, request, PathEndMode.OnCell,
+                TraverseParms.For(pawn),
+                x => CombatTrainingDefOf.TrainingWeapons.DescendantThingDefs.Contains(x.def) &&
+                     pawn.CanReserve(x), null, 0, 12, 50f, out _,
+                RegionType.Set_Passable, true);
 
             return nearestTrainingWeapon;
         }
@@ -312,13 +308,12 @@ namespace KriilMod_CD
          */
         private Toil CreateEquipToil(TargetIndex index)
         {
-            LocalTargetInfo equipment = pawn.jobs.curJob.GetTarget(index);
-            Toil equipToil = new Toil
+            var equipment = pawn.jobs.curJob.GetTarget(index);
+            var equipToil = new Toil
             {
-                initAction = delegate ()
+                initAction = delegate
                 {
-
-                    ThingWithComps thingWithComps = (ThingWithComps)equipment;
+                    var thingWithComps = (ThingWithComps)equipment;
                     ThingWithComps thingWithComps2;
 
                     if (thingWithComps.def.stackLimit > 1 && thingWithComps.stackCount > 1)
@@ -328,13 +323,14 @@ namespace KriilMod_CD
                     else
                     {
                         thingWithComps2 = thingWithComps;
-                        thingWithComps2.DeSpawn(DestroyMode.Vanish);
+                        thingWithComps2.DeSpawn();
                     }
-                    this.pawn.equipment.MakeRoomFor(thingWithComps2);
-                    this.pawn.equipment.AddEquipment(thingWithComps2);
+
+                    pawn.equipment.MakeRoomFor(thingWithComps2);
+                    pawn.equipment.AddEquipment(thingWithComps2);
                     if (thingWithComps.def.soundInteract != null)
                     {
-                        thingWithComps.def.soundInteract.PlayOneShot(new TargetInfo(this.pawn.Position, this.pawn.Map, false));
+                        thingWithComps.def.soundInteract.PlayOneShot(new TargetInfo(pawn.Position, pawn.Map));
                     }
                 },
                 defaultCompleteMode = ToilCompleteMode.Instant

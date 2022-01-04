@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-
   <!--<WorkTypeDef>
 		<defName>TrainingCombat</defName>
 		<labelShort>Train Combat</labelShort>
@@ -18,5 +17,4 @@
 			<li>Violent</li>
 		</workTags>
 	</WorkTypeDef>-->
-
 </LanguageData>

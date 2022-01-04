@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-
-
   <!--==================================== Ranged ====================================-->
-
-
   <!--<ThingDef Name="BaseTrainingGun" Abstract="True" ParentName="BaseWeapon">
     <techLevel>Industrial</techLevel>
     <smeltable>true</smeltable>
@@ -15,7 +11,6 @@
       <Flammability>0.5</Flammability>
     </statBases>
   </ThingDef>-->
-
   <!--<ThingDef Name="BaseMakeableTrainingGun" ParentName="BaseTrainingGun" Abstract="True">
     <recipeMaker>
       <workSpeedStat>SmithingSpeed</workSpeedStat>
@@ -29,16 +24,12 @@
       <researchPrerequisite>Gunsmithing</researchPrerequisite>
     </recipeMaker>
   </ThingDef>-->
-
   <!--<ThingDef Name="BaseHumanMakeableTrainingGun" ParentName="BaseMakeableTrainingGun" Abstract="True">
     <weaponTags>
       <li>TrainingWeapons</li>
     </weaponTags>
   </ThingDef>-->
-
   <!--==================================== Melee ====================================-->
-
-
   <!--<ThingDef Name="BaseMeleeTrainingWeapon" Abstract="True" ParentName="BaseWeapon">
     <techLevel>Industrial</techLevel>
     <smeltable>true</smeltable>
@@ -58,7 +49,6 @@
       <unfinishedThingDef>UnfinishedWeapon</unfinishedThingDef>
     </recipeMaker>
   </ThingDef>-->
-
   <!--<ThingDef Name="BaseMeleeTrainingWeapon_Sharp" ParentName="BaseMeleeTrainingWeapon" Abstract="True">
     <recipeMaker>
       <defaultIngredientFilter>
@@ -73,7 +63,6 @@
       </defaultIngredientFilter>
     </recipeMaker>
   </ThingDef>-->
-
   <!--<ThingDef Name="BaseMeleeTrainingWeapon_Blunt" ParentName="BaseMeleeTrainingWeapon" Abstract="True">
     <recipeMaker>
       <defaultIngredientFilter>
@@ -87,5 +76,4 @@
       </defaultIngredientFilter>
     </recipeMaker>
   </ThingDef>-->
-
 </LanguageData>

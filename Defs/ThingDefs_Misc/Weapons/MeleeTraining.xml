@@ -1,27 +1,26 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
-
   <ThingDef ParentName="BaseMeleeTrainingWeapon_Sharp">
-		<defName>MeleeWeapon_TrainingKnife</defName>
-		<label>training knife</label>
+    <defName>MeleeWeapon_TrainingKnife</defName>
+    <label>training knife</label>
     <techLevel>Neolithic</techLevel>
-		<description>A wooden knife with a dull wooden blade used for training melee combat skills.</description>
-		<graphicData>
-			<texPath>Things/Item/Equipment/WeaponMelee/Knife</texPath>
-			<graphicClass>Graphic_Single</graphicClass>
-		</graphicData>
+    <description>A wooden knife with a dull wooden blade used for training melee combat skills.</description>
+    <graphicData>
+      <texPath>Things/Item/Equipment/WeaponMelee/Knife</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
     <weaponTags>
       <li>TrainingWeapons</li>
     </weaponTags>
     <costStuffCount>15</costStuffCount>
-		<statBases>
-			<WorkToMake>900</WorkToMake>
-			<Mass>0.5</Mass>
-		</statBases>
-		<equippedAngleOffset>-65</equippedAngleOffset>
-		<stuffCategories>
-			<li>Woody</li>
-		</stuffCategories>
+    <statBases>
+      <WorkToMake>900</WorkToMake>
+      <Mass>0.5</Mass>
+    </statBases>
+    <equippedAngleOffset>-65</equippedAngleOffset>
+    <stuffCategories>
+      <li>Woody</li>
+    </stuffCategories>
     <tools>
       <li>
         <label>handle</label>
@@ -48,11 +47,10 @@
         <cooldownTime>2</cooldownTime>
       </li>
     </tools>
-		<recipeMaker>
+    <recipeMaker>
       <recipeUsers>
         <li>CraftingSpot</li>
       </recipeUsers>
     </recipeMaker>
-	</ThingDef>
-  
+  </ThingDef>
 </Defs>

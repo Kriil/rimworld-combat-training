@@ -1,6 +1,6 @@
+using System.Collections.Generic;
 using HugsLib.Utils;
 using RimWorld;
-using System.Collections.Generic;
 using Verse;
 
 namespace KriilMod_CD
@@ -8,33 +8,28 @@ namespace KriilMod_CD
     public class Designator_BaseTrainCombat : Designator
     {
         protected DesignationDef defOf = null;
+
         /*
         * Default constructor 
         */
         public Designator_BaseTrainCombat()
         {
-            this.soundDragSustain = SoundDefOf.Designate_DragStandard;
-            this.soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;
-            this.useMouseIcon = true;
-            this.soundSucceeded = SoundDefOf.Designate_Hunt;
-            this.hotKey = KeyBindingDefOf.Misc9;
+            soundDragSustain = SoundDefOf.Designate_DragStandard;
+            soundDragChanged = SoundDefOf.Designate_DragStandard_Changed;
+            useMouseIcon = true;
+            soundSucceeded = SoundDefOf.Designate_Hunt;
+            hotKey = KeyBindingDefOf.Misc9;
         }
 
-        public override int DraggableDimensions
-        {
-            get
-            {
-                return 2;
-            }
-        }
+        public override int DraggableDimensions => 2;
 
         /*
          * Designates a thing at the given cell.  Checks are made to ensure that a thing at the given cell can be designated with the TrainCombatDesignation
          */
         public override void DesignateSingleCell(IntVec3 loc)
         {
-            Thing combatDummy = GetDesignatable(loc);
-            this.DesignateThing(combatDummy);
+            var combatDummy = GetDesignatable(loc);
+            DesignateThing(combatDummy);
         }
 
         /*
@@ -42,14 +37,15 @@ namespace KriilMod_CD
          */
         public Thing GetDesignatable(IntVec3 loc)
         {
-            List<Thing> thingList = loc.GetThingList(base.Map);
-            foreach (Thing thing in thingList)
+            var thingList = loc.GetThingList(Map);
+            foreach (var thing in thingList)
             {
                 if (CanDesignateThing(thing).Accepted)
                 {
                     return thing;
                 }
             }
+
             return null;
         }
 
@@ -58,13 +54,16 @@ namespace KriilMod_CD
          */
         public override AcceptanceReport CanDesignateThing(Thing t)
         {
-            if (t != null)
+            if (t == null)
             {
-                if (IsCombatDummy(t) && !HugsLibUtility.HasDesignation(t, this.defOf))
-                {
-                    return true;
-                }
+                return false;
             }
+
+            if (IsCombatDummy(t) && !t.HasDesignation(defOf))
+            {
+                return true;
+            }
+
             return false;
         }
 
@@ -73,17 +72,16 @@ namespace KriilMod_CD
          */
         public override AcceptanceReport CanDesignateCell(IntVec3 c)
         {
-            if (c != null)
+            if (!c.InBounds(Map) || c.Fogged(Map))
             {
-                if (!c.InBounds(base.Map) || c.Fogged(base.Map))
-                {
-                    return false;
-                }
-                if (!this.CanDesignateThing(this.GetDesignatable(c)).Accepted)
-                {
-                    return "MessageMustDesignateCombatDummy".Translate();
-                }
+                return false;
             }
+
+            if (!CanDesignateThing(GetDesignatable(c)).Accepted)
+            {
+                return "MessageMustDesignateCombatDummy".Translate();
+            }
+
             return true;
         }
 
@@ -94,7 +92,7 @@ namespace KriilMod_CD
         {
             if (t != null)
             {
-                HugsLibUtility.ToggleDesignation(t, this.defOf, true);
+                t.ToggleDesignation(defOf, true);
             }
         }
 
