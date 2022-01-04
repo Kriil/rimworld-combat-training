@@ -7,10 +7,10 @@ namespace KriilMod_CD
     {
         public Designator_TrainCombatMeleeOnly()
         {
-            this.defaultLabel = "DesignatorTrainCombatMeleeOnly".Translate();
-            this.defaultDesc = "DesignatorTrainCombatMeleeOnlyDesc".Translate();
-            this.icon = icon = TexCommand.AttackMelee;
-            this.defOf = CombatTrainingDefOf.TrainCombatDesignationMeleeOnly;
+            defaultLabel = "DesignatorTrainCombatMeleeOnly".Translate();
+            defaultDesc = "DesignatorTrainCombatMeleeOnlyDesc".Translate();
+            icon = icon = TexCommand.AttackMelee;
+            defOf = CombatTrainingDefOf.TrainCombatDesignationMeleeOnly;
         }
     }
 }

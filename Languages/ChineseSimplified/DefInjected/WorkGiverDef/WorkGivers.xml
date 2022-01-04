@@ -1,11 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-
   <TrainCombat.label>战斗训练</TrainCombat.label>
   <TrainCombat.verb>进行战斗训练</TrainCombat.verb>
   <TrainCombat.gerund>正在进行战斗训练</TrainCombat.gerund>
-
-
   <!--<WorkGiverDef>
 		<defName>TrainCombat</defName>
 		<label>train combat</label>
@@ -19,5 +16,4 @@
 			<li>Manipulation</li>
 		</requiredCapacities>
 	</WorkGiverDef>-->
-
 </LanguageData>

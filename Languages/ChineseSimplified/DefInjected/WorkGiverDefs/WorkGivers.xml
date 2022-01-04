@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-
   <!--<WorkGiverDef>
 		<defName>TrainCombat</defName>
 		<label>train combat</label>
@@ -14,5 +13,4 @@
 			<li>Manipulation</li>
 		</requiredCapacities>
 	</WorkGiverDef>-->
-
 </LanguageData>

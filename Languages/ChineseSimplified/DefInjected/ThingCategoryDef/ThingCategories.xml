@@ -1,11 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-
   <TrainingWeapons.label>训练用武器</TrainingWeapons.label>
   <MeleeTrainingWeapons.label>训练用近战武器</MeleeTrainingWeapons.label>
   <RangedTrainingWeapons.label>训练用远程武器</RangedTrainingWeapons.label>
-
-
   <!--<ThingCategoryDef>
     <defName>TrainingWeapons</defName>
     <label>training weapons</label>
@@ -21,5 +18,4 @@
     <label>ranged training weapons</label>
     <parent>TrainingWeapons</parent>
   </ThingCategoryDef>-->
-
 </LanguageData>

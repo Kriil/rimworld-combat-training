@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-
   <CommandTrainCombatDesc>用这个假人训练战斗技能。</CommandTrainCombatDesc>
   <CommandTrainCombatLabel>战斗训练</CommandTrainCombatLabel>
   <CommandTrainCombatMeleeOnlyDesc>用这个假人训练格斗技能。</CommandTrainCombatMeleeOnlyDesc>
@@ -16,5 +15,4 @@
   <DesignatorTrainCombatRangedOnlyDesc>用一个假人训练射击技能</DesignatorTrainCombatRangedOnlyDesc>
   <WorkTagTrainingCombat>正在进行战斗训练</WorkTagTrainingCombat>
   <PracticedCombatEnoughToday>{1_labelShort}今天已经做了太多的训练了。</PracticedCombatEnoughToday>
-
 </LanguageData>

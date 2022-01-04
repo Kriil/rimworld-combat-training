@@ -1,18 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-
   <Gun_TrainingBBGun.label>训练用BB枪</Gun_TrainingBBGun.label>
   <Gun_TrainingBBGun.description>一杆简易的BB枪，用来进行射击训练。</Gun_TrainingBBGun.description>
   <Gun_TrainingBBGun.tools.0.label>枪托</Gun_TrainingBBGun.tools.0.label>
   <Gun_TrainingBBGun.tools.1.label>枪管</Gun_TrainingBBGun.tools.1.label>
-
   <Bullet_TrainingBBGun.label>BB弹</Bullet_TrainingBBGun.label>
-
   <Bow_TrainingShort.label>训练用弓</Bow_TrainingShort.label>
   <Bow_TrainingShort.description>用一块木头制成的简易的弓，拉力很小，被设计用来发射钝箭头，进行射击训练。</Bow_TrainingShort.description>
   <Bow_TrainingShort.tools.0.label>弓背</Bow_TrainingShort.tools.0.label>
-
   <Arrow_BluntPoint.label>钝箭</Arrow_BluntPoint.label>
-
-
 </LanguageData>

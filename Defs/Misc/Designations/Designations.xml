@@ -1,10 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
-  
   <DesignationDef>
     <!-- Leaving named the same to ensure backwards compatibility -->
     <defName>TrainCombatDesignation</defName>
-    <texturePath>Designations/Plan</texturePath><!-- Appears on thing -->
+    <texturePath>Designations/Plan</texturePath>
+    <!-- Appears on thing -->
     <targetType>Thing</targetType>
     <removeIfBuildingDespawned>true</removeIfBuildingDespawned>
     <designateCancelable>false</designateCancelable>
@@ -23,5 +23,4 @@
     <removeIfBuildingDespawned>true</removeIfBuildingDespawned>
     <designateCancelable>false</designateCancelable>
   </DesignationDef>
-
 </Defs>

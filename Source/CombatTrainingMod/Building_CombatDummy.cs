@@ -1,7 +1,7 @@
 using System;
-using RimWorld;
 using System.Collections.Generic;
 using HugsLib.Utils;
+using RimWorld;
 using Verse;
 
 namespace KriilMod_CD
@@ -21,11 +21,11 @@ namespace KriilMod_CD
 
         public override void PostMapInit()
         {
-            if(this.HasDesignation(CombatTrainingDefOf.TrainCombatDesignation))
+            if (this.HasDesignation(CombatTrainingDefOf.TrainCombatDesignation))
             {
                 trainingType = TrainingTypes.Any;
             }
-            else if(this.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationMeleeOnly))
+            else if (this.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationMeleeOnly))
             {
                 trainingType = TrainingTypes.Melee;
             }
@@ -34,7 +34,7 @@ namespace KriilMod_CD
                 trainingType = TrainingTypes.Ranged;
             }
         }
-        
+
         protected void determineDesignation()
         {
             this.ToggleDesignation(CombatTrainingDefOf.TrainCombatDesignation, false);
@@ -55,13 +55,14 @@ namespace KriilMod_CD
                     break;
             }
         }
-        
+
         public override IEnumerable<Gizmo> GetGizmos()
         {
-            foreach (Gizmo g in base.GetGizmos())
+            foreach (var g in base.GetGizmos())
             {
                 yield return g;
             }
+
             // Melee toggle
             yield return new Command_Toggle
             {

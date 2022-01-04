@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using HugsLib.Utils;
 using RimWorld;
-using System.Collections.Generic;
 using Verse;
 using Verse.AI;
 
@@ -11,23 +11,23 @@ namespace KriilMod_CD
     {
         protected Func<DesignationDef, bool> getDesignationFilter(Pawn pawn)
         {
-            ThingWithComps startingEquippedWeapon = pawn.equipment.Primary;
+            var startingEquippedWeapon = pawn.equipment.Primary;
             Func<DesignationDef, bool> filter;
             if (startingEquippedWeapon == null)
             {
-                filter = (x) => x == CombatTrainingDefOf.TrainCombatDesignation ||
-                                x == CombatTrainingDefOf.TrainCombatDesignationMeleeOnly ||
-                                x == CombatTrainingDefOf.TrainCombatDesignationRangedOnly;
+                filter = x => x == CombatTrainingDefOf.TrainCombatDesignation ||
+                              x == CombatTrainingDefOf.TrainCombatDesignationMeleeOnly ||
+                              x == CombatTrainingDefOf.TrainCombatDesignationRangedOnly;
             }
             else if (startingEquippedWeapon.def.IsMeleeWeapon)
             {
-                filter = (x) => x == CombatTrainingDefOf.TrainCombatDesignation ||
-                                x == CombatTrainingDefOf.TrainCombatDesignationMeleeOnly;
+                filter = x => x == CombatTrainingDefOf.TrainCombatDesignation ||
+                              x == CombatTrainingDefOf.TrainCombatDesignationMeleeOnly;
             }
             else
             {
-                filter = (x) => x == CombatTrainingDefOf.TrainCombatDesignation ||
-                                x == CombatTrainingDefOf.TrainCombatDesignationRangedOnly;
+                filter = x => x == CombatTrainingDefOf.TrainCombatDesignation ||
+                              x == CombatTrainingDefOf.TrainCombatDesignationRangedOnly;
             }
 
             return filter;
@@ -44,10 +44,8 @@ namespace KriilMod_CD
             {
                 return pawn.WorkTagIsDisabled(WorkTags.Violent);
             }
-            else
-            {
-                return CombatTrainingTracker.ShouldSkipCombatTraining(pawn);
-            }
+
+            return CombatTrainingTracker.ShouldSkipCombatTraining(pawn);
         }
 
         public override bool HasJobOnThing(Pawn pawn, Thing t, bool forced = false)
@@ -57,46 +55,51 @@ namespace KriilMod_CD
                 JobFailReason.Is(null, "IsIncapableOfViolence".Translate());
                 return false;
             }
-            if (!t.IsForbidden(pawn))
+
+            if (t.IsForbidden(pawn))
             {
-                LocalTargetInfo target = t;
-                if (pawn.CanReserve(target, 1, -1, null, forced))
+                return false;
+            }
+
+            LocalTargetInfo target = t;
+            if (!pawn.CanReserve(target, 1, -1, null, forced))
+            {
+                return false;
+            }
+
+            var startingEquippedWeapon = pawn.equipment.Primary;
+            if (startingEquippedWeapon == null)
+            {
+                if (t.HasDesignation(CombatTrainingDefOf.TrainCombatDesignation) ||
+                    t.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationMeleeOnly) ||
+                    t.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationRangedOnly))
                 {
-                    ThingWithComps startingEquippedWeapon = pawn.equipment.Primary;
-                    if (startingEquippedWeapon == null)
-                    {
-                        if (HugsLibUtility.HasDesignation(t, CombatTrainingDefOf.TrainCombatDesignation) ||
-                            HugsLibUtility.HasDesignation(t, CombatTrainingDefOf.TrainCombatDesignationMeleeOnly) ||
-                            HugsLibUtility.HasDesignation(t, CombatTrainingDefOf.TrainCombatDesignationRangedOnly))
-                        {
-                            return true;
-                        }
-                    }
-                    else if (startingEquippedWeapon.def.IsMeleeWeapon)
-                    {
-                        if (HugsLibUtility.HasDesignation(t, CombatTrainingDefOf.TrainCombatDesignation) ||
-                            HugsLibUtility.HasDesignation(t, CombatTrainingDefOf.TrainCombatDesignationMeleeOnly))
-                        {
-                            return true;
-                        }
-                    }
-                    else
-                    {
-                        if (HugsLibUtility.HasDesignation(t, CombatTrainingDefOf.TrainCombatDesignation) ||
-                            HugsLibUtility.HasDesignation(t, CombatTrainingDefOf.TrainCombatDesignationRangedOnly))
-                        {
-                            return true;
-                        }
-                    }
+                    return true;
                 }
             }
+            else if (startingEquippedWeapon.def.IsMeleeWeapon)
+            {
+                if (t.HasDesignation(CombatTrainingDefOf.TrainCombatDesignation) ||
+                    t.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationMeleeOnly))
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                if (t.HasDesignation(CombatTrainingDefOf.TrainCombatDesignation) ||
+                    t.HasDesignation(CombatTrainingDefOf.TrainCombatDesignationRangedOnly))
+                {
+                    return true;
+                }
+            }
+
             return false;
         }
 
         public override Job JobOnThing(Pawn pawn, Thing t, bool forced = false)
         {
-
-            Verb verb = pawn.TryGetAttackVerb(t, false);
+            var verb = pawn.TryGetAttackVerb(t);
             if (verb != null)
             {
                 return new Job(CombatTrainingDefOf.TrainOnCombatDummy, t)
@@ -104,16 +107,16 @@ namespace KriilMod_CD
                     verbToUse = verb
                 };
             }
+
             return null;
         }
 
         public override IEnumerable<Thing> PotentialWorkThingsGlobal(Pawn pawn)
         {
-            Func<DesignationDef, bool> filter = getDesignationFilter(pawn);
-            List<Designation> desList = pawn.Map.designationManager.allDesignations;
-            for (int i = 0; i < desList.Count; i++)
+            var filter = getDesignationFilter(pawn);
+            var desList = pawn.Map.designationManager.allDesignations;
+            foreach (var des in desList)
             {
-                Designation des = desList[i];
                 if (filter(des.def))
                 {
                     yield return des.target.Thing;

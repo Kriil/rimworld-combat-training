@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-
   <TrainedInImpressiveCombatTrainingRoom.stages.3.label>体面的战斗训练室</TrainedInImpressiveCombatTrainingRoom.stages.3.label>
   <TrainedInImpressiveCombatTrainingRoom.stages.3.description>我在一间体面的战斗训练室进行了一次不错的训练。</TrainedInImpressiveCombatTrainingRoom.stages.3.description>
   <TrainedInImpressiveCombatTrainingRoom.stages.4.label>令人小有印象的战斗训练室</TrainedInImpressiveCombatTrainingRoom.stages.4.label>
@@ -15,8 +14,6 @@
   <TrainedInImpressiveCombatTrainingRoom.stages.8.description>我在一间令人难以置信的训练室进行了一次超赞的训练，我都不想回来了。</TrainedInImpressiveCombatTrainingRoom.stages.8.description>
   <TrainedInImpressiveCombatTrainingRoom.stages.9.label>奇迹非凡的战斗训练室</TrainedInImpressiveCombatTrainingRoom.stages.9.label>
   <TrainedInImpressiveCombatTrainingRoom.stages.9.description>我在一间最好的训练室进行了一次超赞的训练，我都不想回来了。</TrainedInImpressiveCombatTrainingRoom.stages.9.description>
-
-
   <!--<ThoughtDef>
 		<defName>TrainedInImpressiveCombatTrainingRoom</defName>
 		<durationDays>1</durationDays>
@@ -65,5 +62,4 @@
 			</li>
 		</stages>
 	</ThoughtDef>-->
-
 </LanguageData>

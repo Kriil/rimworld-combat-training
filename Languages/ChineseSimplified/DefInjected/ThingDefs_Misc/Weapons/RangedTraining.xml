@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-
   <!--<ThingDef ParentName="BaseHumanMakeableTrainingGun">
     <defName>Gun_TrainingBBGun</defName>
     <label>training BB gun</label>
@@ -73,7 +72,6 @@
       <graphicClass>Graphic_Single</graphicClass>
     </graphicData>
   </ThingDef>-->
-
   <!--<ThingDef ParentName="BaseWeapon">
     <defName>Bow_TrainingShort</defName>
     <label>training bow</label>
@@ -146,5 +144,4 @@
       <speed>44</speed>
     </projectile>
   </ThingDef>-->
-
 </LanguageData>

@@ -1,22 +1,20 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Defs>
-
-	<WorkTypeDef>
-		<defName>TrainingCombat</defName>
-		<labelShort>Train Combat</labelShort>
-		<pawnLabel>Combat trainer</pawnLabel>
-		<gerundLabel>training combat</gerundLabel>
-		<description>Train shooting and melee skills on a combat dummy. Select a combat dummy and click Train Combat or use &lt;b&gt;Architect &gt; Orders &gt; Train Combat&lt;/b&gt; to designate combat dummies to practice on.\nAdded by the Combat Training mod.</description>
-		<verb>train combat</verb>
-		<naturalPriority>480</naturalPriority>
-		<alwaysStartActive>true</alwaysStartActive>
+  <WorkTypeDef>
+    <defName>TrainingCombat</defName>
+    <labelShort>Train Combat</labelShort>
+    <pawnLabel>Combat trainer</pawnLabel>
+    <gerundLabel>training combat</gerundLabel>
+    <description>Train shooting and melee skills on a combat dummy. Select a combat dummy and click Train Combat or use &lt;b&gt;Architect &gt; Orders &gt; Train Combat&lt;/b&gt; to designate combat dummies to practice on.\nAdded by the Combat Training mod.</description>
+    <verb>train combat</verb>
+    <naturalPriority>480</naturalPriority>
+    <alwaysStartActive>true</alwaysStartActive>
     <relevantSkills>
       <li>Shooting</li>
-			<li>Melee</li>
-		</relevantSkills>
-		<workTags>
-			<li>Violent</li>
-		</workTags>
-	</WorkTypeDef>
-
+      <li>Melee</li>
+    </relevantSkills>
+    <workTags>
+      <li>Violent</li>
+    </workTags>
+  </WorkTypeDef>
 </Defs>

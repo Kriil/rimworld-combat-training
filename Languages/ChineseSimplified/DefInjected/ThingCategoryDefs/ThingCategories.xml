@@ -1,22 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-
   <!--<ThingCategoryDef>
     <defName>TrainingWeapons</defName>
     <label>training weapons</label>
     <parent>Weapons</parent>
   </ThingCategoryDef>-->
-
   <!--<ThingCategoryDef>
     <defName>MeleeTrainingWeapons</defName>
     <label>melee training weapons</label>
     <parent>TrainingWeapons</parent>
   </ThingCategoryDef>-->
-
   <!--<ThingCategoryDef>
     <defName>RangedTrainingWeapons</defName>
     <label>ranged training weapons</label>
     <parent>TrainingWeapons</parent>
   </ThingCategoryDef>-->
-
 </LanguageData>

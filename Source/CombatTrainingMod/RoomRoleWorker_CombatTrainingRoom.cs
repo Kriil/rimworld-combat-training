@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Verse;
+﻿using Verse;
 
 namespace KriilMod_CD
 {
@@ -7,20 +6,17 @@ namespace KriilMod_CD
     {
         public override float GetScore(Room room)
         {
-            int num = 0;
-            List<Thing> containedAndAdjacentThings = room.ContainedAndAdjacentThings;
-            for (int i = 0; i < containedAndAdjacentThings.Count; i++)
+            var num = 0;
+            var containedAndAdjacentThings = room.ContainedAndAdjacentThings;
+            foreach (var thing in containedAndAdjacentThings)
             {
-                Thing thing = containedAndAdjacentThings[i];
-
-                Building_CombatDummy combatDummy = thing as Building_CombatDummy;
-                if (combatDummy != null)
+                if (thing is Building_CombatDummy)
                 {
                     num++;
                 }
-
             }
-            return (float)num * 5f;
+
+            return num * 5f;
         }
     }
 }

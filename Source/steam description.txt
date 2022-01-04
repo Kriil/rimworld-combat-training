@@ -1,6 +1,8 @@
 [h1]This mod adds a new work type to let you train your combat skills. Compatible with RimWorld [1.2][/h1]
 
 
+[h1]Combat dummies no longer breakdown and require components to repair.[/h1]
+
 [h1]Features[/h1]
  • Train your colonist's melee and shooting skills by attacking combat dummies.
  • Prioritize combat training like any other type of work.
